@@ -92,24 +92,22 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 h-screen flex overflow-hidden text-slate-800">
+<body class="bg-[#f8fafc] h-screen flex overflow-hidden text-slate-800">
 
     <!-- 1. NAVIGATION SIDEBAR (Fixed) -->
-    <div class="w-16 bg-[#0f172a] flex flex-col items-center py-5 gap-6 text-gray-400 shrink-0 z-20">
-        <!-- Replaced blue-600 with slate-600 -->
-        <div class="w-9 h-9 bg-slate-600 rounded-lg flex items-center justify-center text-white mb-2 cursor-pointer shadow-lg shadow-slate-900/50">
+    <div class="w-16 bg-[#f8fafc] border-r border-gray-200 flex flex-col items-center py-5 gap-6 text-slate-500 shrink-0 z-20">
+        <div class="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center text-white mb-2 cursor-pointer shadow-lg shadow-slate-200">
             <i class="fa-solid fa-bolt"></i>
         </div>
-        <i class="fa-solid fa-house hover:text-white cursor-pointer transition-colors"></i>
-        <i class="fa-solid fa-tag text-white cursor-pointer relative">
-             <!-- Replaced blue-500 with gray-400 -->
-             <div class="absolute -right-2 top-0 w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+        <i class="fa-solid fa-house hover:text-slate-900 cursor-pointer transition-colors"></i>
+        <i class="fa-solid fa-tag text-slate-900 cursor-pointer relative">
+             <div class="absolute -right-2 top-0 w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
         </i>
-        <i class="fa-solid fa-wrench hover:text-white cursor-pointer transition-colors"></i>
-        <i class="fa-regular fa-calendar hover:text-white cursor-pointer transition-colors"></i>
+        <i class="fa-solid fa-wrench hover:text-slate-900 cursor-pointer transition-colors"></i>
+        <i class="fa-regular fa-calendar hover:text-slate-900 cursor-pointer transition-colors"></i>
         <div class="mt-auto pb-4 flex flex-col gap-6">
-            <i class="fa-solid fa-gear hover:text-white cursor-pointer transition-colors"></i>
-            <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold border-2 border-[#0f172a]">K</div>
+            <i class="fa-solid fa-gear hover:text-slate-900 cursor-pointer transition-colors"></i>
+            <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold border-2 border-[#f8fafc]">K</div>
         </div>
     </div>
 
@@ -126,7 +124,6 @@
                     Urgent first <i class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
                 <!-- Close/Expand Button -->
-                <!-- Replaced blue hovers with gray -->
                 <button onclick="toggleLeftSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors" title="Toggle Sidebar">
                     <i id="left-toggle-icon" class="fa-solid fa-arrow-right-from-bracket rotate-180 transition-transform duration-300"></i>
                 </button>
@@ -137,16 +134,13 @@
         <div class="sidebar-content-wrapper flex flex-col flex-1 overflow-hidden">
             <div class="px-5 py-3">
                 <div class="relative group">
-                    <!-- Replaced blue focus text with gray -->
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm group-focus-within:text-gray-600 transition-colors"></i>
-                    <!-- Replaced blue focus border with gray -->
                     <input type="text" placeholder="Search..." class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:border-gray-400 focus:bg-white transition-all placeholder-gray-400">
                 </div>
             </div>
 
             <div class="flex-1 overflow-y-auto px-4 space-y-3 pb-4">
-                <!-- Active Card (Now Grey Theme) -->
-                <!-- Replaced border-blue-500, shadow-blue-100 with border-gray-400, shadow-gray-200 -->
+                <!-- Active Card -->
                 <div class="bg-white border-2 border-gray-400 rounded-xl p-3 shadow-md shadow-gray-200 cursor-pointer relative transition-transform active:scale-[0.98]">
                     <div class="flex justify-between mb-2">
                         <span class="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">Open</span>
@@ -164,14 +158,12 @@
                     </div>
                 </div>
                  <!-- Inactive Cards -->
-                 <!-- Replaced hover:border-blue-300 with hover:border-gray-300 -->
                  <div class="bg-white border border-gray-200 hover:border-gray-300 rounded-xl p-3 cursor-pointer opacity-80 hover:opacity-100 transition-all">
                     <div class="flex justify-between mb-2">
                         <span class="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">Open</span>
                         <span class="bg-red-50 text-red-500 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">Due in 4h 20m</span>
                     </div>
                     <div class="flex items-center gap-3 mb-1.5">
-                        <!-- Replaced blue accents with gray -->
                         <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center text-xs font-bold border border-gray-200">MS</div>
                         <div>
                             <div class="font-bold text-gray-800 text-sm leading-tight">Maria Smith</div>
@@ -210,53 +202,11 @@
                     
                     <!-- Action Buttons -->
                     <div class="flex items-center gap-2">
-                        <!-- Replaced hover:bg-gray-50 which was already fine, just standardizing -->
-                        <button class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm" title="Call">
-                            <i class="fa-solid fa-phone text-sm"></i>
-                        </button>
-                        <button class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm" title="Email">
-                            <i class="fa-solid fa-envelope text-sm"></i>
-                        </button>
-                        <button class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm" title="Schedule">
-                            <i class="fa-solid fa-calendar text-sm"></i>
-                        </button>
-                        <button class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm">
-                            <i class="fa-solid fa-ellipsis text-sm"></i>
+                        <!-- Only Expand Arrow remains here -->
+                        <button onclick="toggleContactInfo()" class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm" title="Show contact details">
+                            <i id="contact-toggle-icon" class="fa-solid fa-chevron-down text-sm rotate-icon"></i>
                         </button>
                     </div>
-                </div>
-
-                <!-- MOVED: STAGE & OWNER BAR (Redesigned Compact Row) -->
-                <div class="flex items-center justify-between mt-3 mb-2">
-                    <div class="inline-flex items-center bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-                        <!-- Stage Section -->
-                        <div class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer transition-colors">
-                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Stage</span>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs font-bold text-slate-800">Open Lead</span>
-                                <div class="w-8 h-1 bg-gray-100 rounded-full overflow-hidden">
-                                    <div class="h-full w-1/3 bg-slate-600 rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Divider -->
-                        <div class="w-px h-4 bg-gray-200"></div>
-                        
-                        <!-- Owner Section -->
-                        <div class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer transition-colors">
-                             <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Owner</span>
-                             <div class="flex items-center gap-1.5">
-                                <div class="w-4 h-4 bg-gray-100 rounded-full text-[9px] flex items-center justify-center font-bold text-gray-600 border border-gray-200">MT</div>
-                                <span class="text-xs font-bold text-slate-800">Michael Thomas</span>
-                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Expand Button (Moved Here) -->
-                    <button onclick="toggleContactInfo()" class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 transition-colors focus:outline-none" title="Show contact details">
-                        <i id="contact-toggle-icon" class="fa-solid fa-chevron-down text-xs rotate-icon"></i>
-                    </button>
                 </div>
 
                 <!-- HIDDEN CONTACT EXPANDER (Slides down) -->
@@ -265,7 +215,6 @@
                         <!-- Email -->
                         <div class="flex flex-col">
                             <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-1">Email Address</span>
-                            <!-- Replaced group-hover:text-blue-500 with text-gray-600 -->
                             <div class="text-sm font-medium text-slate-700 flex items-center gap-2 group cursor-pointer">
                                 manuela.m@gmail.com
                                 <i class="fa-regular fa-copy text-gray-300 group-hover:text-gray-600 text-xs"></i>
@@ -293,7 +242,6 @@
                 <div class="border-b border-gray-200 mb-4 mt-2"></div>
 
                 <!-- Tabs -->
-                <!-- Replaced blue borders/text with gray/slate -->
                 <div class="flex gap-8 text-sm font-medium text-gray-500 mt-2 overflow-x-auto">
                     <div class="pb-3 border-b-2 border-slate-700 text-slate-800 cursor-pointer whitespace-nowrap">Overview <span class="ml-1 bg-gray-200 text-gray-800 text-[10px] px-1.5 py-0.5 rounded-full">1</span></div>
                     <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Communication <span class="ml-1 bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded-full">2</span></div>
@@ -306,12 +254,40 @@
         <!-- Scrollable Content -->
         <main class="flex-1 overflow-y-auto p-4 md:p-8 max-w-4xl mx-auto w-full">
             
+            <!-- STAGE & OWNER BAR (Overview Tab Content) -->
+            <div class="mb-6">
+                <div class="inline-flex items-center bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <!-- Stage Section -->
+                    <div class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer transition-colors">
+                        <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Stage</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-slate-800">Open Lead</span>
+                            <div class="w-8 h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full w-1/3 bg-slate-600 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Divider -->
+                    <div class="w-px h-4 bg-gray-200"></div>
+                    
+                    <!-- Owner Section -->
+                    <div class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer transition-colors">
+                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Owner</span>
+                            <div class="flex items-center gap-1.5">
+                            <div class="w-4 h-4 bg-gray-100 rounded-full text-[9px] flex items-center justify-center font-bold text-gray-600 border border-gray-200">MT</div>
+                            <span class="text-xs font-bold text-slate-800">Michael Thomas</span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- NEW WIDGET: REQUESTED CAR (Rich Header Expander) -->
             <details class="bg-white border border-gray-200 rounded-xl shadow-sm mb-6 group overflow-hidden">
                 <!-- Rich Summary: Visible by Default -->
                 <summary class="block p-4 cursor-pointer select-none bg-white hover:bg-gray-50 transition-colors">
                     
-                    <!-- MOVED: Request Message Area (Now on Top) -->
+                    <!-- Request Message Area -->
                     <div class="bg-white border border-gray-200 rounded-lg p-3 shadow-sm relative mb-4">
                         <div class="text-xs font-medium text-gray-400 mb-1">Request message</div>
                         <p class="text-sm text-slate-700 leading-snug">Hello, I would love to know the details about the car: What is the suspension?</p>
@@ -333,7 +309,6 @@
 
                         <div class="flex items-center gap-4">
                             <!-- NEW BUTTON: Open Ad -->
-                            <!-- Replaced hover:text-blue with hover:text-gray -->
                             <button class="hidden sm:flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 border border-gray-200 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors group/btn">
                                 Open Ad <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400 group-hover/btn:text-gray-800"></i>
                             </button>
@@ -347,32 +322,101 @@
                     </div>
                 </summary>
                 
-                <!-- Expanded Content: Hidden by Default -->
-                <div class="border-t border-gray-100 p-5 bg-gray-50/30 content-sweep">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
-                        
-                        <!-- Extra Car Data -->
-                        <div class="space-y-4">
+                <!-- Expanded Content -->
+                <div class="border-t border-gray-100 p-6 bg-gray-50/30 content-sweep text-sm">
+                    
+                    <!-- Section 1: Request Details -->
+                    <div class="mb-6">
+                        <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Request Details</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6">
                             <div>
-                                <label class="block text-xs font-medium text-gray-400 mb-1">Status</label>
-                                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-50 border border-green-100 text-green-700 text-xs font-semibold rounded-md">
-                                    <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div> In stock (412 days)
-                                </div>
+                                <div class="text-xs text-gray-400 mb-1">Request type</div>
+                                <div class="font-medium text-slate-700">Quotation</div>
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-gray-400 mb-1">VIN Number</label>
-                                <div class="text-xs font-mono bg-white border border-gray-200 px-2 py-1.5 rounded inline-block text-gray-600 shadow-sm">
+                                <div class="text-xs text-gray-400 mb-1">Source</div>
+                                <div class="font-medium text-slate-700">Marketing</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Source details</div>
+                                <div class="font-medium text-slate-700">ADD 2024</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Dealership</div>
+                                <div class="font-medium text-slate-700">Firenze</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Channel</div>
+                                <div class="font-medium text-slate-700">Email</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">AdCampaign</div>
+                                <div class="font-medium text-slate-700 text-gray-400">--</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">AdMedium</div>
+                                <div class="font-medium text-slate-700 text-gray-400">--</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">AdSource</div>
+                                <div class="font-medium text-slate-700 text-gray-400">--</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Expected purchase date</div>
+                                <div class="font-medium text-slate-700 text-gray-400">--</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Fiscal entity</div>
+                                <div class="font-medium text-slate-700">MotorK</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 my-4"></div>
+
+                    <!-- Section 2: Vehicle Details -->
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Vehicle Details</h4>
+                            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-green-50 border border-green-100 text-green-700 text-[10px] font-semibold rounded-md">
+                                <div class="w-1 h-1 bg-green-500 rounded-full"></div> In stock (412 days)
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6">
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Registration</div>
+                                <div class="font-medium text-slate-700">03/2016</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Kilometers</div>
+                                <div class="font-medium text-slate-700">102,000 Km</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Fuel type</div>
+                                <div class="font-medium text-slate-700">Petrol</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Gear type</div>
+                                <div class="font-medium text-slate-700">Manual</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">VIN Number</div>
+                                <div class="font-mono text-xs bg-white border border-gray-200 px-2 py-1 rounded inline-block text-gray-600">
                                     7015733W8749
                                 </div>
                             </div>
+                            <div>
+                                <div class="text-xs text-gray-400 mb-1">Dealership</div>
+                                <div class="font-medium text-slate-700">Firenze</div>
+                            </div>
                         </div>
 
-                        <!-- Car Actions -->
-                        <div class="flex flex-col justify-center space-y-3">
-                             <!-- Replaced hover:text-blue with hover:text-gray -->
-                             <button class="w-full bg-white border border-gray-200 text-slate-700 hover:text-gray-900 hover:border-gray-400 font-medium px-4 py-2 rounded-lg text-sm transition-colors flex items-center justify-between group">
-                                <span>View technical specs</span>
-                                <i class="fa-solid fa-list-check text-xs text-gray-400 group-hover:text-gray-600"></i>
+                        <!-- Actions -->
+                        <div class="mt-6 flex justify-end">
+                             <button class="bg-white border border-gray-200 text-slate-700 hover:text-gray-900 hover:border-gray-400 font-medium px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-2 group">
+                                <i class="fa-solid fa-list-check text-gray-400 group-hover:text-gray-600"></i>
+                                View technical specs
                             </button>
                         </div>
                     </div>
@@ -381,38 +425,34 @@
 
             <!-- EXISTING WIDGET: MANAGE THIS LEAD -->
             <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-8">
-                <!-- Replaced bg-blue-50/50 with bg-gray-50/50 -->
                 <div class="p-4 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
                      <h3 class="font-bold text-slate-800 text-sm">Manage this lead</h3>
-                     <!-- Replaced bg-blue-100 text-blue-700 with bg-gray-200 text-gray-800 -->
                      <span class="text-xs bg-gray-200 text-gray-800 px-2 py-0.5 rounded font-medium">Task pending</span>
                 </div>
                 
                 <div class="p-5 space-y-6">
                     <!-- Task -->
-                    <!-- Replaced blue classes with gray/slate -->
                     <div class="bg-gray-50/50 border border-gray-200 rounded-lg p-4 relative transition-all duration-300">
                         <div class="flex justify-between items-start mb-3">
                             <div>
                                 <h4 class="font-bold text-slate-800 text-sm">Next Step: Initial Contact</h4>
                                 <p class="text-xs text-gray-500 mt-0.5">Call customer to discuss Audi A6 interest.</p>
                             </div>
-                            <!-- CHANGED: Status Badge with ID (Orange remains orange as it is a status) -->
+                            <!-- Status Badge with ID -->
                             <div id="call-status-badge" class="flex items-center gap-2 text-orange-600 bg-white border border-orange-100 px-2 py-1 rounded text-xs font-semibold shadow-sm transition-colors">
                                 To be contacted <i class="fa-regular fa-clock"></i>
                             </div>
                         </div>
                         <div class="flex gap-3">
-                            <!-- Replaced bg-blue-600 with bg-slate-700 -->
                             <button onclick="toggleCallWidget()" class="bg-slate-700 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors shadow-sm shadow-gray-200">
                               +4901564879300  Call <i class="fa-solid fa-phone text-xs"></i>
                             </button>
                             <button class="bg-white hover:bg-gray-50 border border-gray-200 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors">
                                 Copy number <i class="fa-regular fa-copy text-xs"></i>
                             </button>
-                            <!-- NEW BUTTON: Take Notes -->
-                            <button onclick="toggleNoteInput()" class="bg-white hover:bg-gray-50 border border-gray-200 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors">
-                                Take notes <i class="fa-solid fa-pen text-xs"></i>
+                            <!-- WhatsApp Button -->
+                            <button class="bg-white hover:bg-gray-50 border border-gray-200 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors">
+                                WhatsApp <i class="fa-brands fa-whatsapp text-xs"></i>
                             </button>
                         </div>
 
@@ -421,7 +461,6 @@
                              <!-- Header -->
                              <div class="flex justify-between items-center mb-3 border-b border-slate-700 pb-2">
                                 <div class="flex items-center gap-2">
-                                    <!-- Replaced text-blue-400 with text-gray-400 -->
                                     <i class="fa-solid fa-wave-square text-gray-400 text-xs"></i>
                                     <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Live Transcription</span>
                                 </div>
@@ -434,14 +473,13 @@
                                 </div>
                             </div>
                             
-                            <!-- Streaming Text Area (Fixed Height for ~4 lines) -->
+                            <!-- Streaming Text Area -->
                             <div id="transcription-content" class="space-y-2 h-32 overflow-hidden flex flex-col justify-end">
                                 <!-- Sentences injected here by JS -->
                             </div>
                             
                             <!-- Simple Visualizer Decoration -->
                             <div class="absolute bottom-0 left-0 right-0 h-1 flex items-end opacity-20 gap-0.5 pointer-events-none z-0">
-                                <!-- Replaced blue-500 with gray-500 -->
                                 <div class="w-full bg-gray-500 h-2 animate-pulse"></div>
                                 <div class="w-full bg-gray-500 h-4 animate-pulse" style="animation-delay: 0.1s"></div>
                                 <div class="w-full bg-gray-500 h-3 animate-pulse" style="animation-delay: 0.2s"></div>
@@ -450,13 +488,10 @@
                             </div>
                         </div>
 
-                        <!-- MOVED: Quick Note Input (Outside & Below) -->
-                        <div id="call-note-input" class="hidden mt-3 relative z-10">
+                        <!-- Quick Note Input (Visible by default) -->
+                        <div id="call-note-input" class="mt-3 relative z-10">
                             <div class="relative">
-                                <!-- Replaced border-blue-200 with border-gray-300 and focus:border-blue-500 with focus:border-gray-500 -->
                                 <textarea placeholder="Add a quick note about this call..." rows="3" class="w-full bg-white border border-gray-300 rounded-md pl-3 pr-8 py-2 text-xs text-slate-700 focus:outline-none focus:border-gray-500 placeholder-gray-400 transition-colors shadow-sm resize-none"></textarea>
-                                <!-- CHANGED: Send Icon without background -->
-                                <!-- Replaced text-blue-400 hover:text-blue-600 with text-gray-400 hover:text-gray-600 -->
                                 <button class="absolute right-2 bottom-2 text-gray-400 hover:text-gray-600 p-1.5 transition-colors" title="Save Note">
                                     <i class="fa-solid fa-paper-plane text-xs"></i>
                                 </button>
@@ -469,24 +504,28 @@
                 <!-- Footer Actions & Reschedule -->
                 <div class="bg-gray-50 border-t border-gray-200">
                     <div class="p-4 flex justify-end gap-3">
-                        <!-- NEW: Postpone Button -->
+                        <!-- Disqualify Button -->
+                        <button class="bg-white hover:bg-red-50 text-slate-700 hover:text-red-600 border border-gray-200 hover:border-red-200 font-medium px-4 py-2.5 rounded-lg text-sm shadow-sm transition-colors flex items-center gap-2">
+                            Disqualify <i class="fa-solid fa-ban"></i>
+                        </button>
+
+                        <!-- Postpone Button -->
                         <button onclick="toggleRescheduleWidget()" class="bg-white hover:bg-gray-50 text-slate-700 border border-gray-200 font-medium px-4 py-2.5 rounded-lg text-sm shadow-sm transition-colors flex items-center gap-2">
                             Postpone <i class="fa-regular fa-clock"></i>
                         </button>
                         
-                        <!-- UPDATED: Complete Button (Green) -->
+                        <!-- Create Opportunity Button -->
                         <button class="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2.5 rounded-lg text-sm shadow-lg shadow-green-200 transition-colors flex items-center gap-2">
-                            Complete <i class="fa-solid fa-check"></i>
+                            Create Opportunity <i class="fa-solid fa-check"></i>
                         </button>
                     </div>
 
-                    <!-- NEW: Reschedule Widget (Hidden) -->
+                    <!-- Reschedule Widget (Hidden) -->
                     <div id="reschedule-widget" class="hidden border-t border-gray-200 p-5 bg-white transition-all">
                         <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Reschedule to...</h5>
                         
                         <!-- Quick Presets -->
                         <div class="grid grid-cols-3 gap-3 mb-4">
-                            <!-- Replaced hover:border-blue-400 hover:bg-blue-50 group-hover:text-blue-700 with gray versions -->
                             <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
                                 <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Later Today</span>
                                 <span class="text-[10px] text-gray-400">+2 Hours</span>
@@ -503,12 +542,10 @@
 
                         <!-- Custom Date/Time -->
                         <div class="flex gap-3 mb-4">
-                            <!-- Replaced focus:border-blue-500 with focus:border-gray-400 -->
                             <input type="date" class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-gray-400 focus:outline-none">
                             <input type="time" class="w-1/3 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-gray-400 focus:outline-none">
                         </div>
                         
-                        <!-- ADDED: onclick event to close the widget -->
                         <button onclick="toggleRescheduleWidget()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2 rounded-lg text-sm transition-colors">
                             Confirm New Time
                         </button>
@@ -526,9 +563,8 @@
                     
                     <!-- Dropdown Menu -->
                     <div id="add-new-menu" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg shadow-gray-100/50 z-10 overflow-hidden flex flex-col p-1">
-                        <!-- Replaced hover:text-blue-600 with hover:text-gray-900 -->
                         <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Note</button>
-                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Purchase option</button>
+                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Financing</button>
                         <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Trade-in</button>
                         <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Attachment</button>
                     </div>
@@ -543,9 +579,6 @@
     <div id="right-sidebar" class="w-80 sidebar-panel bg-white border-l border-gray-200 shrink-0 flex flex-col relative z-10 whitespace-nowrap">
         <!-- Header -->
         <div class="h-16 sidebar-header px-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center shrink-0">
-            <!-- Close/Expand Button (Left side of header in right panel for balance? Or Right side? Usually left for collapsing right panel) -->
-            <!-- Placing it on Left to match direction: < ] -->
-             <!-- Replaced hover:text-blue-600 hover:bg-blue-50 with gray -->
              <button onclick="toggleRightSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors" title="Toggle Sidebar">
                 <i id="right-toggle-icon" class="fa-solid fa-arrow-right-from-bracket transition-transform duration-300"></i>
             </button>
@@ -554,7 +587,7 @@
         </div>
 
         <!-- Sidebar Content Wrapper -->
-        <div class="sidebar-content-wrapper flex flex-col flex-1 overflow-hidden">
+        <div class="sidebar-content-wrapper flex flex-col flex-1 overflow-hidden whitespace-normal">
             <!-- Scrollable Timeline -->
             <div class="flex-1 overflow-y-auto px-5 py-6 relative">
                 <!-- Connector Line -->
@@ -613,50 +646,12 @@
                             <div class="text-xs text-gray-400 mt-1">07:22</div>
                         </div>
                     </div>
-
-                    <!-- NEXT TASK WIDGET (Floating in stream) -->
-                    <!-- Replaced shadow-blue-50/50 with shadow-gray-200 -->
-                    <div class="bg-white border border-gray-200 shadow-lg shadow-gray-200 rounded-xl p-4 relative z-20 mb-4 ml-2">
-                        <div class="flex justify-between items-center mb-2">
-                            <div class="flex items-center gap-2">
-                                <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs">
-                                    <i class="fa-solid fa-bell"></i>
-                                </div>
-                                <span class="font-bold text-sm text-slate-800">Next Task</span>
-                            </div>
-                            <!-- Replaced bg-blue-600 hover:bg-blue-700 with bg-slate-700 hover:bg-slate-800 -->
-                            <button class="bg-slate-700 hover:bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded transition-colors">
-                                Complete
-                            </button>
-                        </div>
-                        <div class="font-bold text-slate-800 text-sm mb-1">Task: Lead Qualification Call</div>
-                        <div class="text-xs text-gray-500 mb-2">Due: Today, 4:00 PM</div>
-                        <div class="text-xs text-gray-400 italic mb-3 border-l-2 border-gray-200 pl-2">
-                            Notes: Validate budget and delivery timeline.
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-medium py-1.5 rounded transition-colors">Postpone</button>
-                            <!-- Replaced text-blue-600 with text-gray-700 -->
-                            <button class="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 text-xs font-medium py-1.5 rounded transition-colors">View All Tasks</button>
-                        </div>
-                    </div>
                 </div>
                 
-                <!-- Spacer for Input -->
-                <div class="h-16"></div>
+                <!-- Spacer for Input removed -->
             </div>
 
-            <!-- Sticky Bottom Input -->
-            <div class="p-4 border-t border-gray-200 bg-white absolute bottom-0 w-full z-30">
-                <div class="relative">
-                    <!-- Replaced focus:border-blue-500 with focus:border-gray-400 -->
-                    <input type="text" placeholder="Add a note..." class="w-full bg-gray-50 border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-gray-400 focus:bg-white shadow-sm transition-all">
-                    <!-- Replaced hover:text-blue-600 with hover:text-gray-900 -->
-                    <button class="absolute right-2 top-2 text-gray-400 hover:text-gray-900 p-1">
-                        <i class="fa-solid fa-paper-plane text-sm"></i>
-                    </button>
-                </div>
-            </div>
+            <!-- Sticky Bottom Input removed -->
         </div>
     </div>
 
@@ -764,10 +759,7 @@
             { speaker: "Lead", text: "Sounds amazing. Let's proceed with the paperwork." }
         ];
 
-        function toggleNoteInput() {
-            const noteInput = document.getElementById('call-note-input');
-            noteInput.classList.toggle('hidden');
-        }
+        // REMOVED: toggleNoteInput function (no longer needed)
 
         function toggleRescheduleWidget() {
             const widget = document.getElementById('reschedule-widget');

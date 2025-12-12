@@ -101,19 +101,19 @@
 <body class="bg-[#f8fafc] h-screen flex overflow-hidden text-slate-800">
 
     <!-- 1. NAVIGATION SIDEBAR (Fixed) -->
-    <div class="w-16 bg-[#f8fafc] border-r border-gray-200 flex flex-col items-center py-5 gap-6 text-slate-500 shrink-0 z-20">
-        <div class="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center text-white mb-2 cursor-pointer shadow-lg shadow-slate-200">
+    <div class="w-16 bg-[#0f172a] flex flex-col items-center py-5 gap-6 text-gray-400 shrink-0 z-20">
+        <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white mb-2 cursor-pointer shadow-lg shadow-blue-900/50">
             <i class="fa-solid fa-bolt"></i>
         </div>
-        <i class="fa-solid fa-house hover:text-slate-900 cursor-pointer transition-colors"></i>
-        <i class="fa-solid fa-tag text-slate-900 cursor-pointer relative">
-             <div class="absolute -right-2 top-0 w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+        <i class="fa-solid fa-house hover:text-white cursor-pointer transition-colors"></i>
+        <i class="fa-solid fa-tag text-white cursor-pointer relative">
+             <div class="absolute -right-2 top-0 w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
         </i>
-        <i class="fa-solid fa-wrench hover:text-slate-900 cursor-pointer transition-colors"></i>
-        <i class="fa-regular fa-calendar hover:text-slate-900 cursor-pointer transition-colors"></i>
+        <i class="fa-solid fa-wrench hover:text-white cursor-pointer transition-colors"></i>
+        <i class="fa-regular fa-calendar hover:text-white cursor-pointer transition-colors"></i>
         <div class="mt-auto pb-4 flex flex-col gap-6">
-            <i class="fa-solid fa-gear hover:text-slate-900 cursor-pointer transition-colors"></i>
-            <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold border-2 border-[#f8fafc]">K</div>
+            <i class="fa-solid fa-gear hover:text-white cursor-pointer transition-colors"></i>
+            <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold border-2 border-[#0f172a]">K</div>
         </div>
     </div>
 
@@ -129,7 +129,7 @@
                 <button class="header-text text-xs font-medium bg-white hover:bg-gray-50 px-3 py-1.5 rounded-md flex items-center gap-2 text-gray-600 border border-gray-200 transition-colors shadow-sm whitespace-nowrap">
                     Urgent first <i class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
-                <button onclick="toggleLeftSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors" title="Toggle Sidebar">
+                <button onclick="toggleLeftSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors" title="Toggle Sidebar">
                     <i id="left-toggle-icon" class="fa-solid fa-arrow-right-from-bracket rotate-180 transition-transform duration-300"></i>
                 </button>
             </div>
@@ -139,15 +139,15 @@
         <div class="sidebar-content-wrapper flex flex-col flex-1 overflow-hidden">
             <div class="px-5 py-3">
                 <div class="relative group">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm group-focus-within:text-gray-600 transition-colors"></i>
-                    <input type="text" placeholder="Search..." class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:border-gray-400 focus:bg-white transition-all placeholder-gray-400">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm group-focus-within:text-blue-500 transition-colors"></i>
+                    <input type="text" placeholder="Search..." class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all placeholder-gray-400">
                 </div>
             </div>
 
             <div class="flex-1 overflow-y-auto px-4 space-y-3 pb-4">
                 
                 <!-- Active Card -->
-                <div class="bg-white border-2 border-gray-400 rounded-xl p-3 shadow-md shadow-gray-200 cursor-pointer relative transition-transform active:scale-[0.98] group">
+                <div class="bg-white border-2 border-blue-500 rounded-xl p-3 shadow-md shadow-blue-100 cursor-pointer relative transition-transform active:scale-[0.98] group">
                     <div class="flex justify-between items-start mb-2.5">
                         <div class="flex items-center gap-1.5 flex-wrap">
                             <span class="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border border-gray-200">Open</span>
@@ -186,7 +186,7 @@
                 </div>
 
                  <!-- Inactive Card -->
-                 <div class="bg-white border border-gray-200 hover:border-gray-300 rounded-xl p-3 cursor-pointer opacity-80 hover:opacity-100 transition-all relative group">
+                 <div class="bg-white border border-gray-200 hover:border-blue-300 rounded-xl p-3 cursor-pointer opacity-80 hover:opacity-100 transition-all relative group">
                     <div class="flex justify-between items-start mb-2.5">
                         <div class="flex items-center gap-1.5 flex-wrap">
                             <span class="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border border-gray-200">Open</span>
@@ -200,7 +200,7 @@
                     </div>
 
                     <div class="flex items-center gap-3 mb-1">
-                        <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center text-xs font-bold border border-gray-200">MS</div>
+                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold border border-blue-200">MS</div>
                         <div>
                             <div class="font-bold text-gray-800 text-sm leading-tight">Maria Smith</div>
                             <div class="flex items-center gap-1.5 text-gray-600 text-xs mt-0.5">
@@ -261,7 +261,7 @@
                             <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-1">Email Address</span>
                             <div class="text-sm font-medium text-slate-700 flex items-center gap-2 group cursor-pointer">
                                 manuela.m@gmail.com
-                                <i class="fa-regular fa-copy text-gray-300 group-hover:text-gray-600 text-xs"></i>
+                                <i class="fa-regular fa-copy text-gray-300 group-hover:text-blue-500 text-xs"></i>
                             </div>
                         </div>
                         <!-- Phone -->
@@ -287,7 +287,7 @@
 
                 <!-- Tabs -->
                 <div class="flex gap-8 text-sm font-medium text-gray-500 mt-2 overflow-x-auto">
-                    <div class="pb-3 border-b-2 border-slate-700 text-slate-800 cursor-pointer whitespace-nowrap">Overview <span class="ml-1 bg-gray-200 text-gray-800 text-[10px] px-1.5 py-0.5 rounded-full">1</span></div>
+                    <div class="pb-3 border-b-2 border-blue-600 text-blue-600 cursor-pointer whitespace-nowrap">Overview <span class="ml-1 bg-blue-100 text-blue-700 text-[10px] px-1.5 py-0.5 rounded-full">1</span></div>
                     <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Communication <span class="ml-1 bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded-full">2</span></div>
                     <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Notes</div>
                     <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Attachments</div>
@@ -448,8 +448,8 @@
                         </div>
 
                         <div class="mt-6 flex justify-end">
-                             <button class="bg-white border border-gray-200 text-slate-700 hover:text-gray-900 hover:border-gray-400 font-medium px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-2 group">
-                                <i class="fa-solid fa-list-check text-gray-400 group-hover:text-gray-600"></i>
+                             <button class="bg-white border border-gray-200 text-slate-700 hover:text-blue-600 hover:border-blue-200 font-medium px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-2 group">
+                                <i class="fa-solid fa-list-check text-gray-400 group-hover:text-blue-500"></i>
                                 View technical specs
                             </button>
                         </div>
@@ -461,12 +461,12 @@
             <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-8">
                 <div class="p-4 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
                      <h3 class="font-bold text-slate-800 text-sm">Manage this lead</h3>
-                     <span class="text-xs bg-gray-200 text-gray-800 px-2 py-0.5 rounded font-medium">Task pending</span>
+                     <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-medium">Task pending</span>
                 </div>
                 
                 <div class="p-5 space-y-6">
                     <!-- Task -->
-                    <div class="bg-gray-50/50 border border-gray-200 rounded-lg p-4 relative transition-all duration-300">
+                    <div class="bg-blue-50/50 border border-blue-100 rounded-lg p-4 relative transition-all duration-300">
                         <div class="flex justify-between items-start mb-3">
                             <div>
                                 <h4 class="font-bold text-slate-800 text-sm">Next Step: Initial Contact</h4>
@@ -477,7 +477,7 @@
                             </div>
                         </div>
                         <div class="flex gap-3">
-                            <button onclick="toggleCallWidget()" class="bg-slate-700 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors shadow-sm shadow-gray-200">
+                            <button onclick="toggleCallWidget()" class="bg-slate-700 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors shadow-sm shadow-blue-200">
                               +4901564879300  Call <i class="fa-solid fa-phone text-xs"></i>
                             </button>
                             <button class="bg-white hover:bg-gray-50 border border-gray-200 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors">
@@ -492,7 +492,7 @@
                         <div id="call-transcription-panel" class="hidden mt-4 bg-slate-900 border border-slate-700 rounded-lg p-4 shadow-inner relative overflow-hidden">
                              <div class="flex justify-between items-center mb-3 border-b border-slate-700 pb-2">
                                 <div class="flex items-center gap-2">
-                                    <i class="fa-solid fa-wave-square text-gray-400 text-xs"></i>
+                                    <i class="fa-solid fa-wave-square text-blue-400 text-xs"></i>
                                     <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Live Transcription</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
@@ -507,11 +507,11 @@
                             <div id="transcription-content" class="space-y-2 h-32 overflow-hidden flex flex-col justify-end"></div>
                             
                             <div class="absolute bottom-0 left-0 right-0 h-1 flex items-end opacity-20 gap-0.5 pointer-events-none z-0">
-                                <div class="w-full bg-gray-500 h-2 animate-pulse"></div>
-                                <div class="w-full bg-gray-500 h-4 animate-pulse" style="animation-delay: 0.1s"></div>
-                                <div class="w-full bg-gray-500 h-3 animate-pulse" style="animation-delay: 0.2s"></div>
-                                <div class="w-full bg-gray-500 h-5 animate-pulse" style="animation-delay: 0.3s"></div>
-                                <div class="w-full bg-gray-500 h-2 animate-pulse" style="animation-delay: 0.4s"></div>
+                                <div class="w-full bg-blue-500 h-2 animate-pulse"></div>
+                                <div class="w-full bg-blue-500 h-4 animate-pulse" style="animation-delay: 0.1s"></div>
+                                <div class="w-full bg-blue-500 h-3 animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-full bg-blue-500 h-5 animate-pulse" style="animation-delay: 0.3s"></div>
+                                <div class="w-full bg-blue-500 h-2 animate-pulse" style="animation-delay: 0.4s"></div>
                             </div>
                         </div>
 
@@ -521,7 +521,7 @@
                         <!-- Quick Note Input -->
                         <div id="call-note-input" class="mt-3 relative z-10">
                             <div class="relative">
-                                <textarea id="quick-note-textarea" placeholder="Add a quick note about this call..." rows="3" class="w-full bg-white border border-gray-300 rounded-md pl-3 pr-8 py-2 text-xs text-slate-700 focus:outline-none focus:border-gray-500 placeholder-gray-400 transition-colors shadow-sm resize-none"></textarea>
+                                <textarea id="quick-note-textarea" placeholder="Add a quick note about this call..." rows="3" class="w-full bg-white border border-gray-300 rounded-md pl-3 pr-8 py-2 text-xs text-slate-700 focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-colors shadow-sm resize-none"></textarea>
                                 <button onclick="saveCallNote()" class="absolute right-2 bottom-2 text-gray-400 hover:text-gray-600 p-1.5 transition-colors" title="Save Note">
                                     <i class="fa-solid fa-paper-plane text-xs"></i>
                                 </button>
@@ -551,22 +551,22 @@
                     <div id="reschedule-widget" class="hidden border-t border-gray-200 p-5 bg-white transition-all">
                         <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Reschedule to...</h5>
                         <div class="grid grid-cols-3 gap-3 mb-4">
-                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
-                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Later Today</span>
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-blue-700">Later Today</span>
                                 <span class="text-[10px] text-gray-400">+2 Hours</span>
                             </button>
-                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
-                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Tomorrow</span>
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-blue-700">Tomorrow</span>
                                 <span class="text-[10px] text-gray-400">09:00 AM</span>
                             </button>
-                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
-                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Next Week</span>
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-blue-700">Next Week</span>
                                 <span class="text-[10px] text-gray-400">Mon, 9 AM</span>
                             </button>
                         </div>
                         <div class="flex gap-3 mb-4">
-                            <input type="date" class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-gray-400 focus:outline-none">
-                            <input type="time" class="w-1/3 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-gray-400 focus:outline-none">
+                            <input type="date" class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-blue-500 focus:outline-none">
+                            <input type="time" class="w-1/3 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-blue-500 focus:outline-none">
                         </div>
                         <button onclick="toggleRescheduleWidget()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2 rounded-lg text-sm transition-colors">
                             Confirm New Time
@@ -970,6 +970,21 @@
             </div>
             
             <div class="p-5">
+                <!-- NEW: Category Radio Buttons -->
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Category</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="disqualify-category" value="not-valid" class="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300">
+                            Not Valid
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="disqualify-category" value="not-interested" class="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300" checked>
+                            Not Interested
+                        </label>
+                    </div>
+                </div>
+
                 <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Failure Reason</label>
                 <select id="disqualify-reason" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 shadow-sm">
                     <option value="Data cleanup">Data cleanup</option>
@@ -992,6 +1007,45 @@
 
     <!-- Script to handle custom interactions -->
     <script>
+        // Use var to avoid "Identifier already declared" issues in live preview environments
+        var transcriptionInterval;
+        var timerInterval;
+        var seconds = 0;
+        
+        var conversation = [
+            { speaker: "Sales", text: "Good morning, am I speaking with Mr. Adams?" },
+            { speaker: "Lead", text: "Yes, this is Josh Adams speaking." },
+            { speaker: "Sales", text: "Hi Josh, Michael here regarding your Audi A6 inquiry." },
+            { speaker: "Lead", text: "Oh, hi Michael! Yes, I was waiting for your call." },
+            { speaker: "Sales", text: "Great. I see you're interested in the Allroad. Do you have a vehicle you'd like to trade in?" },
+            { 
+                speaker: "Lead", 
+                text: "Yes, I actually have a BMW X3, 2018 model with about 45,000 km.", 
+                action: { 
+                    type: 'tradein', 
+                    data: { brand: 'BMW', model: 'X3', year: '2018', km: '45,000', auto: true } 
+                } 
+            },
+            { speaker: "Sales", text: "Excellent, we can certainly evaluate that. And regarding payment?" },
+            { 
+                speaker: "Lead", 
+                text: "I'd like to put down €5,000 and finance the rest over 3 years.", 
+                action: { 
+                    type: 'financing', 
+                    data: { product: 'Standard Loan', provider: 'Audi Financial', total: '14,000', monthly: '420', auto: true } 
+                } 
+            },
+            { 
+                speaker: "Sales", 
+                text: "Understood. I'll note that down and prepare the proposal.",
+                action: {
+                    type: 'note',
+                    data: "Customer requests 3-year financing with €5k deposit."
+                }
+            },
+            { speaker: "Lead", text: "Sounds amazing. Let's proceed with the paperwork." }
+        ];
+
         function toggleContactInfo() {
             const expander = document.getElementById('contact-expander');
             const icon = document.getElementById('contact-toggle-icon');
@@ -1145,26 +1199,6 @@
             }
         }
 
-        // LIVE CALL TRANSCRIPTION WIDGET LOGIC
-        let transcriptionInterval;
-        let timerInterval;
-        let seconds = 0;
-        
-        const conversation = [
-            { speaker: "Sales", text: "Good morning, am I speaking with Mr. Adams?" },
-            { speaker: "Lead", text: "Yes, this is Josh Adams speaking." },
-            { speaker: "Sales", text: "Hi Josh, Michael here regarding your Audi A6 inquiry." },
-            { speaker: "Lead", text: "Oh, hi Michael! Yes, I was waiting for your call." },
-            { speaker: "Sales", text: "Great. I saw you had a question about the suspension?" },
-            { speaker: "Lead", text: "Exactly. Does this model have the adaptive air suspension?" },
-            { speaker: "Sales", text: "It does indeed. It's the Allroad trim, so it's standard." },
-            { speaker: "Lead", text: "That is perfect. And what about the delivery time?" },
-            { speaker: "Sales", text: "We have it in stock, so we can deliver within 2 weeks." },
-            { speaker: "Lead", text: "Sounds amazing. Let's proceed with the paperwork." }
-        ];
-
-        // REMOVED: toggleNoteInput function (no longer needed)
-
         function toggleRescheduleWidget() {
             const widget = document.getElementById('reschedule-widget');
             const oppWidget = document.getElementById('opportunity-widget');
@@ -1240,14 +1274,35 @@
             }
         }
 
+        // Helper function to add Note to timeline
+        function addNoteToTimeline(text) {
+            const container = document.getElementById('inline-content-container');
+            const noteHtml = `
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in mb-4">
+                    <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold shrink-0 border border-orange-200">JA</div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-xs font-bold text-slate-800">Josh Adams</span>
+                            <span class="text-[10px] text-gray-400">Just now</span>
+                            <span class="bg-blue-50 text-blue-600 text-[9px] px-1.5 py-0.5 rounded border border-blue-100">Auto-detected</span>
+                        </div>
+                        <p class="text-sm text-slate-700">${text}</p>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += noteHtml;
+            // Scroll to bottom of container
+            container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
         function saveInlineNote() {
             const text = document.getElementById('inline-note-input').value;
             if (!text.trim()) return;
-
-            const container = document.getElementById('inline-content-container');
             
+            // Manual entry doesn't need "Auto-detected" badge, but reusing structure for simplicity or modifying slightly
+            const container = document.getElementById('inline-content-container');
             const noteHtml = `
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in">
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in mb-4">
                     <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold shrink-0 border border-orange-200">JA</div>
                     <div>
                         <div class="flex items-center gap-2 mb-1">
@@ -1258,7 +1313,6 @@
                     </div>
                 </div>
             `;
-            
             container.innerHTML += noteHtml;
             cancelInlineWidget('note');
         }
@@ -1270,7 +1324,7 @@
             const container = document.getElementById('inline-content-container');
             
             const attachmentHtml = `
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in">
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in mb-4">
                     <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-bold shrink-0 border border-blue-100">
                         <i class="fa-solid fa-paperclip"></i>
                     </div>
@@ -1298,16 +1352,11 @@
             cancelInlineWidget('attachment');
         }
 
-        function saveInlineTradeIn() {
-            const brand = document.getElementById('tradein-brand').value;
-            const model = document.getElementById('tradein-model').value || 'Unknown Model';
-            const km = document.getElementById('tradein-km').value || '0';
-            const year = document.getElementById('tradein-date').value ? new Date(document.getElementById('tradein-date').value).getFullYear() : 'Unknown Year';
-
+        // Helper function to add Trade-in to timeline
+        function addTradeInToTimeline(data) {
             const container = document.getElementById('inline-content-container');
-
             const tradeInHtml = `
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in">
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in mb-4">
                     <div class="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-xs font-bold shrink-0 border border-green-100">
                         <i class="fa-solid fa-car-side"></i>
                     </div>
@@ -1316,14 +1365,15 @@
                             <span class="text-xs font-bold text-slate-800">Josh Adams</span>
                             <span class="text-[10px] text-gray-400">added a trade-in</span>
                             <span class="text-[10px] text-gray-400">• Just now</span>
+                            ${data.auto ? '<span class="bg-blue-50 text-blue-600 text-[9px] px-1.5 py-0.5 rounded border border-blue-100">Auto-detected</span>' : ''}
                         </div>
                         <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h4 class="text-sm font-bold text-slate-800">${brand} ${model}</h4>
+                                    <h4 class="text-sm font-bold text-slate-800">${data.brand} ${data.model}</h4>
                                     <div class="text-xs text-gray-500 mt-1 flex gap-3">
-                                        <span><i class="fa-regular fa-calendar mr-1"></i>${year}</span>
-                                        <span><i class="fa-solid fa-road mr-1"></i>${km} km</span>
+                                        <span><i class="fa-regular fa-calendar mr-1"></i>${data.year}</span>
+                                        <span><i class="fa-solid fa-road mr-1"></i>${data.km} km</span>
                                     </div>
                                 </div>
                                 <span class="bg-white border border-gray-200 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded">Pending Eval</span>
@@ -1332,21 +1382,25 @@
                     </div>
                 </div>
             `;
-
             container.innerHTML += tradeInHtml;
+            container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function saveInlineTradeIn() {
+            const brand = document.getElementById('tradein-brand').value;
+            const model = document.getElementById('tradein-model').value || 'Unknown Model';
+            const km = document.getElementById('tradein-km').value || '0';
+            const year = document.getElementById('tradein-date').value ? new Date(document.getElementById('tradein-date').value).getFullYear() : 'Unknown Year';
+
+            addTradeInToTimeline({ brand, model, km, year, auto: false });
             cancelInlineWidget('tradein');
         }
 
-        function saveInlineFinancing() {
-            const product = document.getElementById('fin-product-name').value || 'Standard Financing';
-            const provider = document.getElementById('fin-provider-name').value || 'N/A';
-            const monthly = document.getElementById('fin-monthly-rate').value || '0';
-            const total = document.getElementById('fin-loan-amount').value || '0';
-
+        // Helper function to add Financing to timeline
+        function addFinancingToTimeline(data) {
             const container = document.getElementById('inline-content-container');
-
             const financeHtml = `
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in">
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in mb-4">
                     <div class="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-xs font-bold shrink-0 border border-purple-100">
                         <i class="fa-solid fa-file-invoice-dollar"></i>
                     </div>
@@ -1355,23 +1409,33 @@
                             <span class="text-xs font-bold text-slate-800">Josh Adams</span>
                             <span class="text-[10px] text-gray-400">added a financing proposal</span>
                             <span class="text-[10px] text-gray-400">• Just now</span>
+                            ${data.auto ? '<span class="bg-blue-50 text-blue-600 text-[9px] px-1.5 py-0.5 rounded border border-blue-100">Auto-detected</span>' : ''}
                         </div>
                         <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
                             <div class="flex justify-between items-center mb-2">
-                                <h4 class="text-sm font-bold text-slate-800">${product}</h4>
+                                <h4 class="text-sm font-bold text-slate-800">${data.product}</h4>
                                 <span class="bg-white border border-gray-200 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded">Draft</span>
                             </div>
                             <div class="grid grid-cols-2 gap-2 text-xs">
-                                <div class="text-gray-500">Provider: <span class="font-medium text-slate-700">${provider}</span></div>
-                                <div class="text-gray-500 text-right">Loan: <span class="font-medium text-slate-700">€${total}</span></div>
-                                <div class="text-gray-500">Monthly: <span class="font-medium text-slate-700">€${monthly}/mo</span></div>
+                                <div class="text-gray-500">Provider: <span class="font-medium text-slate-700">${data.provider}</span></div>
+                                <div class="text-gray-500 text-right">Loan: <span class="font-medium text-slate-700">€${data.total}</span></div>
+                                <div class="text-gray-500">Monthly: <span class="font-medium text-slate-700">€${data.monthly}/mo</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             `;
-
             container.innerHTML += financeHtml;
+            container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function saveInlineFinancing() {
+            const product = document.getElementById('fin-product-name').value || 'Standard Financing';
+            const provider = document.getElementById('fin-provider-name').value || 'N/A';
+            const monthly = document.getElementById('fin-monthly-rate').value || '0';
+            const total = document.getElementById('fin-loan-amount').value || '0';
+
+            addFinancingToTimeline({ product, provider, monthly, total, auto: false });
             cancelInlineWidget('financing');
         }
 
@@ -1441,35 +1505,20 @@
                         
                         content.appendChild(div);
                         
+                        // Handle Actions (Auto-add widgets)
+                        if (line.action) {
+                            if (line.action.type === 'tradein') {
+                                addTradeInToTimeline(line.action.data);
+                            } else if (line.action.type === 'financing') {
+                                addFinancingToTimeline(line.action.data);
+                            } else if (line.action.type === 'note') {
+                                addNoteToTimeline(line.action.data);
+                            }
+                        }
+                        
                         // Trigger animation
                         requestAnimationFrame(() => {
                             div.classList.remove('translate-y-2', 'opacity-0');
                         });
 
-                        // Keep only last 4 lines visible
-                        if (content.children.length > 4) {
-                            content.removeChild(content.firstChild);
-                        }
-                        
-                        lineIndex++;
-                    } else {
-                        clearInterval(transcriptionInterval);
-                    }
-                }, 2500); // Add new line every 2.5 seconds
-
-            } else {
-                // Close Widget
-                panel.classList.add('hidden');
-                // Note input remains in its current state (visible or hidden) based on user's manual toggle
-                
-                // REVERT BADGE: To be contacted (or Contacted if you prefer logic state change)
-                badge.innerHTML = 'To be contacted <i class="fa-regular fa-clock"></i>';
-                badge.className = "flex items-center gap-2 text-orange-600 bg-white border border-orange-100 px-2 py-1 rounded text-xs font-semibold shadow-sm transition-colors";
-
-                clearInterval(transcriptionInterval);
-                clearInterval(timerInterval);
-            }
-        }
-    </script>
-</body>
-</html>
+                        // Keep only last

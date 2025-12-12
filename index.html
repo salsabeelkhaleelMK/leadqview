@@ -98,27 +98,22 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 h-screen flex overflow-hidden text-slate-800">
+<body class="bg-[#f8fafc] h-screen flex overflow-hidden text-slate-800">
 
     <!-- 1. NAVIGATION SIDEBAR (Fixed) -->
-    <!-- Reverted to dark blue background -->
-    <div class="w-16 bg-[#0f172a] flex flex-col items-center py-5 gap-6 text-gray-400 shrink-0 z-20">
-        <!-- Reverted logo bg to blue -->
-        <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white mb-2 cursor-pointer shadow-lg shadow-blue-900/50">
+    <div class="w-16 bg-[#f8fafc] border-r border-gray-200 flex flex-col items-center py-5 gap-6 text-slate-500 shrink-0 z-20">
+        <div class="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center text-white mb-2 cursor-pointer shadow-lg shadow-slate-200">
             <i class="fa-solid fa-bolt"></i>
         </div>
-        <!-- Reverted hover text to white -->
-        <i class="fa-solid fa-house hover:text-white cursor-pointer transition-colors"></i>
-        <i class="fa-solid fa-tag text-white cursor-pointer relative">
-             <!-- Reverted dot to blue -->
-             <div class="absolute -right-2 top-0 w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+        <i class="fa-solid fa-house hover:text-slate-900 cursor-pointer transition-colors"></i>
+        <i class="fa-solid fa-tag text-slate-900 cursor-pointer relative">
+             <div class="absolute -right-2 top-0 w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
         </i>
-        <i class="fa-solid fa-wrench hover:text-white cursor-pointer transition-colors"></i>
-        <i class="fa-regular fa-calendar hover:text-white cursor-pointer transition-colors"></i>
+        <i class="fa-solid fa-wrench hover:text-slate-900 cursor-pointer transition-colors"></i>
+        <i class="fa-regular fa-calendar hover:text-slate-900 cursor-pointer transition-colors"></i>
         <div class="mt-auto pb-4 flex flex-col gap-6">
-            <i class="fa-solid fa-gear hover:text-white cursor-pointer transition-colors"></i>
-            <!-- Reverted border to match dark bg -->
-            <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold border-2 border-[#0f172a]">K</div>
+            <i class="fa-solid fa-gear hover:text-slate-900 cursor-pointer transition-colors"></i>
+            <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold border-2 border-[#f8fafc]">K</div>
         </div>
     </div>
 
@@ -134,9 +129,7 @@
                 <button class="header-text text-xs font-medium bg-white hover:bg-gray-50 px-3 py-1.5 rounded-md flex items-center gap-2 text-gray-600 border border-gray-200 transition-colors shadow-sm whitespace-nowrap">
                     Urgent first <i class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
-                <!-- Close/Expand Button -->
-                <!-- Reverted to blue hover -->
-                <button onclick="toggleLeftSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors" title="Toggle Sidebar">
+                <button onclick="toggleLeftSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors" title="Toggle Sidebar">
                     <i id="left-toggle-icon" class="fa-solid fa-arrow-right-from-bracket rotate-180 transition-transform duration-300"></i>
                 </button>
             </div>
@@ -146,35 +139,30 @@
         <div class="sidebar-content-wrapper flex flex-col flex-1 overflow-hidden">
             <div class="px-5 py-3">
                 <div class="relative group">
-                    <!-- Reverted to blue focus -->
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm group-focus-within:text-blue-500 transition-colors"></i>
-                    <input type="text" placeholder="Search..." class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all placeholder-gray-400">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm group-focus-within:text-gray-600 transition-colors"></i>
+                    <input type="text" placeholder="Search..." class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:border-gray-400 focus:bg-white transition-all placeholder-gray-400">
                 </div>
             </div>
 
             <div class="flex-1 overflow-y-auto px-4 space-y-3 pb-4">
                 
-                <!-- Active Card (Redesigned with Hot/Open/Due/Menu) -->
-                <div class="bg-white border-2 border-blue-500 rounded-xl p-3 shadow-md shadow-blue-100 cursor-pointer relative transition-transform active:scale-[0.98] group">
-                    <!-- Top Row: Badges and Actions -->
+                <!-- Active Card -->
+                <div class="bg-white border-2 border-gray-400 rounded-xl p-3 shadow-md shadow-gray-200 cursor-pointer relative transition-transform active:scale-[0.98] group">
                     <div class="flex justify-between items-start mb-2.5">
                         <div class="flex items-center gap-1.5 flex-wrap">
                             <span class="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border border-gray-200">Open</span>
-                            <!-- Hot Lead Badge -->
                             <span class="bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border border-red-100 flex items-center gap-1">
                                 <i class="fa-solid fa-fire text-[9px]"></i> Hot
                             </span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-red-500 text-[10px] font-bold uppercase tracking-wide">Due in 1h 12m</span>
-                            <!-- Menu Trigger -->
                             <button onclick="toggleCardMenu(event, 'menu-card-1')" class="w-5 h-5 flex items-center justify-center rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
                                 <i class="fa-solid fa-ellipsis-vertical text-xs"></i>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Card Body -->
                     <div class="flex items-center gap-3 mb-1">
                         <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold border border-orange-200">JA</div>
                         <div>
@@ -192,22 +180,19 @@
                             <i class="fa-solid fa-share text-gray-400"></i> Reassign
                         </button>
                         <button class="w-full text-left px-3 py-2 text-xs text-slate-700 hover:bg-gray-50 flex items-center gap-2">
-                            <!-- Renamed from "Mark as cold" to "Unmark as hot" -->
                             <i class="fa-regular fa-snowflake text-gray-400"></i> Unmark as hot
                         </button>
                     </div>
                 </div>
 
-                 <!-- Inactive Card (Redesigned) -->
-                 <div class="bg-white border border-gray-200 hover:border-blue-300 rounded-xl p-3 cursor-pointer opacity-80 hover:opacity-100 transition-all relative group">
-                    <!-- Top Row -->
+                 <!-- Inactive Card -->
+                 <div class="bg-white border border-gray-200 hover:border-gray-300 rounded-xl p-3 cursor-pointer opacity-80 hover:opacity-100 transition-all relative group">
                     <div class="flex justify-between items-start mb-2.5">
                         <div class="flex items-center gap-1.5 flex-wrap">
                             <span class="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border border-gray-200">Open</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-gray-400 text-[10px] font-bold uppercase tracking-wide">Due in 4h 20m</span>
-                            <!-- Menu Trigger -->
                             <button onclick="toggleCardMenu(event, 'menu-card-2')" class="w-5 h-5 flex items-center justify-center rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
                                 <i class="fa-solid fa-ellipsis-vertical text-xs"></i>
                             </button>
@@ -215,7 +200,7 @@
                     </div>
 
                     <div class="flex items-center gap-3 mb-1">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold border border-blue-200">MS</div>
+                        <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center text-xs font-bold border border-gray-200">MS</div>
                         <div>
                             <div class="font-bold text-gray-800 text-sm leading-tight">Maria Smith</div>
                             <div class="flex items-center gap-1.5 text-gray-600 text-xs mt-0.5">
@@ -225,7 +210,6 @@
                         </div>
                     </div>
 
-                    <!-- Dropdown Menu (Hidden) -->
                     <div id="menu-card-2" class="hidden absolute right-2 top-8 w-36 bg-white border border-gray-200 rounded-lg shadow-lg z-50 card-menu overflow-hidden">
                         <button class="w-full text-left px-3 py-2 text-xs text-slate-700 hover:bg-gray-50 flex items-center gap-2">
                             <i class="fa-solid fa-share text-gray-400"></i> Reassign
@@ -263,7 +247,6 @@
                     
                     <!-- Action Buttons -->
                     <div class="flex items-center gap-2">
-                        <!-- Only Expand Arrow remains here -->
                         <button onclick="toggleContactInfo()" class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm" title="Show contact details">
                             <i id="contact-toggle-icon" class="fa-solid fa-chevron-down text-sm rotate-icon"></i>
                         </button>
@@ -276,10 +259,9 @@
                         <!-- Email -->
                         <div class="flex flex-col">
                             <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-1">Email Address</span>
-                            <!-- Reverted hover color to blue -->
                             <div class="text-sm font-medium text-slate-700 flex items-center gap-2 group cursor-pointer">
                                 manuela.m@gmail.com
-                                <i class="fa-regular fa-copy text-gray-300 group-hover:text-blue-500 text-xs"></i>
+                                <i class="fa-regular fa-copy text-gray-300 group-hover:text-gray-600 text-xs"></i>
                             </div>
                         </div>
                         <!-- Phone -->
@@ -304,9 +286,8 @@
                 <div class="border-b border-gray-200 mb-4 mt-2"></div>
 
                 <!-- Tabs -->
-                <!-- Reverted to blue active state -->
                 <div class="flex gap-8 text-sm font-medium text-gray-500 mt-2 overflow-x-auto">
-                    <div class="pb-3 border-b-2 border-blue-600 text-blue-600 cursor-pointer whitespace-nowrap">Overview <span class="ml-1 bg-blue-100 text-blue-700 text-[10px] px-1.5 py-0.5 rounded-full">1</span></div>
+                    <div class="pb-3 border-b-2 border-slate-700 text-slate-800 cursor-pointer whitespace-nowrap">Overview <span class="ml-1 bg-gray-200 text-gray-800 text-[10px] px-1.5 py-0.5 rounded-full">1</span></div>
                     <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Communication <span class="ml-1 bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded-full">2</span></div>
                     <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Notes</div>
                     <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Attachments</div>
@@ -345,21 +326,17 @@
                 </div>
             </div>
 
-            <!-- NEW WIDGET: REQUESTED CAR (Rich Header Expander) -->
+            <!-- NEW WIDGET: REQUESTED CAR -->
             <details class="bg-white border border-gray-200 rounded-xl shadow-sm mb-6 group overflow-hidden">
-                <!-- Rich Summary: Visible by Default -->
                 <summary class="block p-4 cursor-pointer select-none bg-white hover:bg-gray-50 transition-colors">
                     
-                    <!-- Request Message Area -->
                     <div class="bg-white border border-gray-200 rounded-lg p-3 shadow-sm relative mb-4">
                         <div class="text-xs font-medium text-gray-400 mb-1">Request message</div>
                         <p class="text-sm text-slate-700 leading-snug">Hello, I would love to know the details about the car: What is the suspension?</p>
                     </div>
 
-                    <!-- Top Row: Car Info & Actions -->
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <!-- Thumbnail visible in collapsed state -->
                             <div class="w-16 h-12 bg-gray-200 rounded-md overflow-hidden shrink-0 border border-gray-100">
                                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5ap8dR1YoIY8e1Yopb3EojZi1LTuCvzymmg&s" alt="Audi A6" class="w-full h-full object-cover">
                             </div>
@@ -371,9 +348,8 @@
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <!-- NEW BUTTON: Open Ad -->
                             <button class="hidden sm:flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 border border-gray-200 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors group/btn">
-                                Open Ad <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400 group-hover/btn:text-blue-600"></i>
+                                Open Ad <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400 group-hover/btn:text-gray-800"></i>
                             </button>
 
                             <div class="text-right hidden md:block">
@@ -385,10 +361,7 @@
                     </div>
                 </summary>
                 
-                <!-- Expanded Content -->
                 <div class="border-t border-gray-100 p-6 bg-gray-50/30 content-sweep text-sm">
-                    
-                    <!-- Section 1: Request Details -->
                     <div class="mb-6">
                         <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Request Details</h4>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6">
@@ -437,7 +410,6 @@
 
                     <div class="border-t border-gray-200 my-4"></div>
 
-                    <!-- Section 2: Vehicle Details -->
                     <div>
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Vehicle Details</h4>
@@ -475,10 +447,9 @@
                             </div>
                         </div>
 
-                        <!-- Actions -->
                         <div class="mt-6 flex justify-end">
-                             <button class="bg-white border border-gray-200 text-slate-700 hover:text-blue-600 hover:border-blue-200 font-medium px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-2 group">
-                                <i class="fa-solid fa-list-check text-gray-400 group-hover:text-blue-500"></i>
+                             <button class="bg-white border border-gray-200 text-slate-700 hover:text-gray-900 hover:border-gray-400 font-medium px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-2 group">
+                                <i class="fa-solid fa-list-check text-gray-400 group-hover:text-gray-600"></i>
                                 View technical specs
                             </button>
                         </div>
@@ -490,42 +461,38 @@
             <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-8">
                 <div class="p-4 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
                      <h3 class="font-bold text-slate-800 text-sm">Manage this lead</h3>
-                     <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-medium">Task pending</span>
+                     <span class="text-xs bg-gray-200 text-gray-800 px-2 py-0.5 rounded font-medium">Task pending</span>
                 </div>
                 
                 <div class="p-5 space-y-6">
                     <!-- Task -->
-                    <div class="bg-blue-50/50 border border-blue-100 rounded-lg p-4 relative transition-all duration-300">
+                    <div class="bg-gray-50/50 border border-gray-200 rounded-lg p-4 relative transition-all duration-300">
                         <div class="flex justify-between items-start mb-3">
                             <div>
                                 <h4 class="font-bold text-slate-800 text-sm">Next Step: Initial Contact</h4>
                                 <p class="text-xs text-gray-500 mt-0.5">Call customer to discuss Audi A6 interest.</p>
                             </div>
-                            <!-- Status Badge with ID -->
                             <div id="call-status-badge" class="flex items-center gap-2 text-orange-600 bg-white border border-orange-100 px-2 py-1 rounded text-xs font-semibold shadow-sm transition-colors">
                                 To be contacted <i class="fa-regular fa-clock"></i>
                             </div>
                         </div>
                         <div class="flex gap-3">
-                            <button onclick="toggleCallWidget()" class="bg-slate-700 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors shadow-sm shadow-blue-200">
+                            <button onclick="toggleCallWidget()" class="bg-slate-700 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors shadow-sm shadow-gray-200">
                               +4901564879300  Call <i class="fa-solid fa-phone text-xs"></i>
                             </button>
                             <button class="bg-white hover:bg-gray-50 border border-gray-200 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors">
                                 Copy number <i class="fa-regular fa-copy text-xs"></i>
                             </button>
-                            <!-- WhatsApp Button -->
                             <button class="bg-white hover:bg-gray-50 border border-gray-200 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors">
                                 WhatsApp <i class="fa-brands fa-whatsapp text-xs"></i>
                             </button>
                         </div>
 
-                        <!-- LIVE TRANSCRIPTION PANEL (Hidden by default) -->
+                        <!-- LIVE TRANSCRIPTION PANEL -->
                         <div id="call-transcription-panel" class="hidden mt-4 bg-slate-900 border border-slate-700 rounded-lg p-4 shadow-inner relative overflow-hidden">
-                             <!-- Header -->
                              <div class="flex justify-between items-center mb-3 border-b border-slate-700 pb-2">
                                 <div class="flex items-center gap-2">
-                                    <!-- Reverted to blue text -->
-                                    <i class="fa-solid fa-wave-square text-blue-400 text-xs"></i>
+                                    <i class="fa-solid fa-wave-square text-gray-400 text-xs"></i>
                                     <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Live Transcription</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
@@ -537,27 +504,25 @@
                                 </div>
                             </div>
                             
-                            <!-- Streaming Text Area -->
-                            <div id="transcription-content" class="space-y-2 h-32 overflow-hidden flex flex-col justify-end">
-                                <!-- Sentences injected here by JS -->
-                            </div>
+                            <div id="transcription-content" class="space-y-2 h-32 overflow-hidden flex flex-col justify-end"></div>
                             
-                            <!-- Simple Visualizer Decoration -->
                             <div class="absolute bottom-0 left-0 right-0 h-1 flex items-end opacity-20 gap-0.5 pointer-events-none z-0">
-                                <!-- Reverted to blue visualizer -->
-                                <div class="w-full bg-blue-500 h-2 animate-pulse"></div>
-                                <div class="w-full bg-blue-500 h-4 animate-pulse" style="animation-delay: 0.1s"></div>
-                                <div class="w-full bg-blue-500 h-3 animate-pulse" style="animation-delay: 0.2s"></div>
-                                <div class="w-full bg-blue-500 h-5 animate-pulse" style="animation-delay: 0.3s"></div>
-                                <div class="w-full bg-blue-500 h-2 animate-pulse" style="animation-delay: 0.4s"></div>
+                                <div class="w-full bg-gray-500 h-2 animate-pulse"></div>
+                                <div class="w-full bg-gray-500 h-4 animate-pulse" style="animation-delay: 0.1s"></div>
+                                <div class="w-full bg-gray-500 h-3 animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-full bg-gray-500 h-5 animate-pulse" style="animation-delay: 0.3s"></div>
+                                <div class="w-full bg-gray-500 h-2 animate-pulse" style="animation-delay: 0.4s"></div>
                             </div>
                         </div>
 
-                        <!-- Quick Note Input (Visible by default) -->
+                        <!-- SAVED CALL NOTES CONTAINER -->
+                        <div id="call-notes-container" class="mt-3 space-y-2"></div>
+
+                        <!-- Quick Note Input -->
                         <div id="call-note-input" class="mt-3 relative z-10">
                             <div class="relative">
-                                <textarea placeholder="Add a quick note about this call..." rows="3" class="w-full bg-white border border-gray-300 rounded-md pl-3 pr-8 py-2 text-xs text-slate-700 focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-colors shadow-sm resize-none"></textarea>
-                                <button class="absolute right-2 bottom-2 text-blue-400 hover:text-blue-600 p-1.5 transition-colors" title="Save Note">
+                                <textarea id="quick-note-textarea" placeholder="Add a quick note about this call..." rows="3" class="w-full bg-white border border-gray-300 rounded-md pl-3 pr-8 py-2 text-xs text-slate-700 focus:outline-none focus:border-gray-500 placeholder-gray-400 transition-colors shadow-sm resize-none"></textarea>
+                                <button onclick="saveCallNote()" class="absolute right-2 bottom-2 text-gray-400 hover:text-gray-600 p-1.5 transition-colors" title="Save Note">
                                     <i class="fa-solid fa-paper-plane text-xs"></i>
                                 </button>
                             </div>
@@ -569,17 +534,14 @@
                 <!-- Footer Actions & Reschedule -->
                 <div class="bg-gray-50 border-t border-gray-200">
                     <div class="p-4 flex justify-end gap-3">
-                        <!-- Disqualify Button -->
-                        <button class="bg-white hover:bg-red-50 text-slate-700 hover:text-red-600 border border-gray-200 hover:border-red-200 font-medium px-4 py-2.5 rounded-lg text-sm shadow-sm transition-colors flex items-center gap-2">
+                        <button onclick="toggleDisqualifyModal()" class="bg-white hover:bg-red-50 text-slate-700 hover:text-red-600 border border-gray-200 hover:border-red-200 font-medium px-4 py-2.5 rounded-lg text-sm shadow-sm transition-colors flex items-center gap-2">
                             Disqualify <i class="fa-solid fa-ban"></i>
                         </button>
 
-                        <!-- Postpone Button -->
                         <button onclick="toggleRescheduleWidget()" class="bg-white hover:bg-gray-50 text-slate-700 border border-gray-200 font-medium px-4 py-2.5 rounded-lg text-sm shadow-sm transition-colors flex items-center gap-2">
                             Postpone <i class="fa-regular fa-clock"></i>
                         </button>
                         
-                        <!-- Create Opportunity Button -->
                         <button onclick="toggleOpportunityWidget()" class="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2.5 rounded-lg text-sm shadow-lg shadow-green-200 transition-colors flex items-center gap-2">
                             Create Opportunity <i class="fa-solid fa-check"></i>
                         </button>
@@ -588,39 +550,32 @@
                     <!-- Reschedule Widget (Hidden) -->
                     <div id="reschedule-widget" class="hidden border-t border-gray-200 p-5 bg-white transition-all">
                         <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Reschedule to...</h5>
-                        
-                        <!-- Quick Presets -->
                         <div class="grid grid-cols-3 gap-3 mb-4">
-                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all group">
-                                <span class="text-xs font-semibold text-slate-700 group-hover:text-blue-700">Later Today</span>
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Later Today</span>
                                 <span class="text-[10px] text-gray-400">+2 Hours</span>
                             </button>
-                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all group">
-                                <span class="text-xs font-semibold text-slate-700 group-hover:text-blue-700">Tomorrow</span>
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Tomorrow</span>
                                 <span class="text-[10px] text-gray-400">09:00 AM</span>
                             </button>
-                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all group">
-                                <span class="text-xs font-semibold text-slate-700 group-hover:text-blue-700">Next Week</span>
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Next Week</span>
                                 <span class="text-[10px] text-gray-400">Mon, 9 AM</span>
                             </button>
                         </div>
-
-                        <!-- Custom Date/Time -->
                         <div class="flex gap-3 mb-4">
-                            <input type="date" class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-blue-500 focus:outline-none">
-                            <input type="time" class="w-1/3 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-blue-500 focus:outline-none">
+                            <input type="date" class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-gray-400 focus:outline-none">
+                            <input type="time" class="w-1/3 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-gray-400 focus:outline-none">
                         </div>
-                        
                         <button onclick="toggleRescheduleWidget()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2 rounded-lg text-sm transition-colors">
                             Confirm New Time
                         </button>
                     </div>
 
-                    <!-- NEW: Create Opportunity Widget (Hidden) -->
+                    <!-- Create Opportunity Widget (Hidden) -->
                     <div id="opportunity-widget" class="hidden border-t border-gray-200 p-5 bg-white transition-all">
                         <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Schedule Appointment</h5>
-                        
-                        <!-- Appointment Type -->
                         <div class="mb-4">
                             <label class="block text-xs font-medium text-gray-500 mb-1.5">Appointment Type</label>
                             <div class="relative">
@@ -634,14 +589,10 @@
                                 <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-xs text-gray-400 pointer-events-none"></i>
                             </div>
                         </div>
-
-                        <!-- Date Selection -->
                         <div class="mb-4">
                             <label class="block text-xs font-medium text-gray-500 mb-1.5">Select Date</label>
                             <input type="date" onchange="showTimeslots()" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none shadow-sm transition-colors cursor-pointer">
                         </div>
-
-                        <!-- Timeslots (Hidden by default) -->
                         <div id="opportunity-timeslots" class="hidden mb-5 animate-fade-in">
                             <label class="block text-xs font-medium text-gray-500 mb-2">Available Slots</label>
                             <div class="grid grid-cols-4 gap-2">
@@ -653,11 +604,262 @@
                                 <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all focus:ring-2 focus:ring-blue-200 focus:border-blue-500">16:30</button>
                             </div>
                         </div>
-                        
                         <button onclick="toggleOpportunityWidget()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg text-sm transition-colors shadow-md shadow-green-100 flex items-center justify-center gap-2">
                             Confirm Appointment <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
+                </div>
+            </div>
+
+            <!-- REPLACEMENT WIDGET: CLOSED LEAD (Hidden initially) -->
+            <div id="closed-lead-widget" class="hidden bg-gray-50 border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-8">
+                <div class="p-6 flex flex-col items-center justify-center text-center">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-3">
+                        <i class="fa-solid fa-ban text-red-500 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">Lead Disqualified</h3>
+                    <p class="text-sm text-gray-500 mt-1 mb-4">This lead has been marked as lost.</p>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg px-4 py-2 flex items-center gap-2 text-sm text-slate-700 shadow-sm">
+                        <span class="text-gray-400 text-xs uppercase font-bold tracking-wider">Reason:</span>
+                        <span id="disqualified-reason-display" class="font-medium">Reason goes here</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DYNAMIC INLINE CONTENT CONTAINER -->
+            <div id="inline-content-container" class="space-y-4 mb-6 px-1"></div>
+
+            <!-- INLINE WIDGETS (Hidden by default) -->
+            
+            <!-- Note Widget -->
+            <div id="inline-note-widget" class="hidden bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-6 animate-fade-in relative">
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t border-l border-gray-200 rotate-45"></div>
+                <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">New Note</h5>
+                <textarea id="inline-note-input" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:border-blue-500 resize-none" rows="3" placeholder="Type your note here..."></textarea>
+                <div class="flex justify-end gap-2 mt-3">
+                    <button onclick="cancelInlineWidget('note')" class="text-xs font-medium text-gray-500 hover:text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
+                    <button onclick="saveInlineNote()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition-colors shadow-sm shadow-blue-200">Save Note</button>
+                </div>
+            </div>
+
+            <!-- Attachment Widget -->
+            <div id="inline-attachment-widget" class="hidden bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-6 animate-fade-in relative">
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t border-l border-gray-200 rotate-45"></div>
+                <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Add Attachment</h5>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-gray-50 hover:border-blue-300 transition-colors cursor-pointer relative group">
+                    <input type="file" id="inline-file-input" class="absolute inset-0 opacity-0 cursor-pointer" onchange="updateFileName(this)">
+                    <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-cloud-arrow-up text-blue-500 text-lg"></i>
+                    </div>
+                    <p class="text-sm text-gray-700 font-medium group-hover:text-blue-600">Click to upload or drag and drop</p>
+                    <p id="file-name-display" class="text-xs text-gray-400 mt-1">SVG, PNG, JPG or PDF</p>
+                </div>
+                <div class="flex justify-end gap-2 mt-3">
+                    <button onclick="cancelInlineWidget('attachment')" class="text-xs font-medium text-gray-500 hover:text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
+                    <button onclick="saveInlineAttachment()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition-colors shadow-sm shadow-blue-200">Upload</button>
+                </div>
+            </div>
+
+            <!-- Trade-in Widget -->
+            <div id="inline-tradein-widget" class="hidden bg-white border border-gray-200 rounded-xl p-5 shadow-sm mb-6 animate-fade-in relative">
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t border-l border-gray-200 rotate-45"></div>
+                <div class="flex justify-between items-center mb-4">
+                    <h5 class="text-sm font-bold text-slate-800">Trade-in</h5>
+                    <button onclick="cancelInlineWidget('tradein')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                
+                <div class="space-y-4">
+                    <!-- Vehicle Class -->
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Vehicle class</label>
+                        <select id="tradein-class" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                            <option>Car</option>
+                            <option>Motorcycle</option>
+                            <option>Van</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">* Brand</label>
+                            <select id="tradein-brand" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                                <option>Aiways</option>
+                                <option>Audi</option>
+                                <option>BMW</option>
+                                <option>Mercedes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Model</label>
+                            <input type="text" id="tradein-model" class="w-full bg-white border border-blue-400 ring-1 ring-blue-100 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-600 text-slate-700" placeholder="">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Version</label>
+                            <input type="text" id="tradein-version" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Km</label>
+                            <input type="number" id="tradein-km" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Plate</label>
+                            <input type="text" id="tradein-plate" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Registration date</label>
+                            <div class="relative">
+                                <input type="date" id="tradein-date" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Evaluation</label>
+                            <input type="text" id="tradein-evaluation" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Owner</label>
+                            <input type="text" id="tradein-owner" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Fuel type</label>
+                            <select id="tradein-fuel" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                                <option>Select</option>
+                                <option>Petrol</option>
+                                <option>Diesel</option>
+                                <option>Electric</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Gear type</label>
+                            <select id="tradein-gear" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                                <option>Select</option>
+                                <option>Manual</option>
+                                <option>Automatic</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Color</label>
+                            <input type="text" id="tradein-color" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">VAT deductible</label>
+                            <div class="flex items-center gap-2 mt-2">
+                                <input type="checkbox" id="tradein-vat" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <label for="tradein-vat" class="text-sm text-slate-700">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 mt-6 border-t border-gray-100 pt-4">
+                    <button onclick="cancelInlineWidget('tradein')" class="text-xs font-medium text-gray-500 hover:text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
+                    <button onclick="saveInlineTradeIn()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition-colors shadow-sm shadow-blue-200">Save</button>
+                </div>
+            </div>
+
+            <!-- Financing Widget -->
+            <div id="inline-financing-widget" class="hidden bg-white border border-gray-200 rounded-xl p-5 shadow-sm mb-6 animate-fade-in relative">
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t border-l border-gray-200 rotate-45"></div>
+                <div class="flex justify-between items-center mb-4">
+                    <h5 class="text-sm font-bold text-slate-800">Financing Proposal</h5>
+                    <button onclick="cancelInlineWidget('financing')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                
+                <div class="space-y-4">
+                    <!-- Dates -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Start date</label>
+                            <input type="date" id="fin-start-date" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Expiration date</label>
+                            <input type="date" id="fin-exp-date" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                    </div>
+
+                    <!-- Provider -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-2">Provider type</label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="radio" name="provider-type" value="captive" class="text-blue-600 focus:ring-blue-500"> Captive
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="radio" name="provider-type" value="independent" class="text-blue-600 focus:ring-blue-500"> Independent
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Provider name</label>
+                            <input type="text" id="fin-provider-name" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                    </div>
+
+                    <!-- Product Name -->
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Financial product name</label>
+                        <input type="text" id="fin-product-name" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                    </div>
+
+                    <!-- Deposit & Loan -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Deposit</label>
+                            <input type="number" id="fin-deposit" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Total loan amount</label>
+                            <input type="number" id="fin-loan-amount" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                    </div>
+
+                    <!-- Rates & Installment -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Tan %</label>
+                            <input type="number" id="fin-tan" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Taeg %</label>
+                            <input type="number" id="fin-taeg" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Max installment</label>
+                            <input type="number" id="fin-max-inst" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                    </div>
+
+                    <!-- Amounts & Rate -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Min amount</label>
+                            <input type="number" id="fin-min-amount" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Max amount</label>
+                            <input type="number" id="fin-max-amount" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Monthly rate</label>
+                            <input type="number" id="fin-monthly-rate" class="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-slate-700">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 mt-6 border-t border-gray-100 pt-4">
+                    <button onclick="cancelInlineWidget('financing')" class="text-xs font-medium text-gray-500 hover:text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
+                    <button onclick="saveInlineFinancing()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-4 py-2 rounded-lg transition-colors shadow-sm shadow-blue-200">Save</button>
                 </div>
             </div>
 
@@ -671,10 +873,10 @@
                     
                     <!-- Dropdown Menu -->
                     <div id="add-new-menu" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg shadow-gray-100/50 z-10 overflow-hidden flex flex-col p-1">
-                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors font-medium">Note</button>
-                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors font-medium">Financing</button>
-                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors font-medium">Trade-in</button>
-                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors font-medium">Attachment</button>
+                        <button onclick="showInlineWidget('note')" class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors font-medium">Note</button>
+                        <button onclick="showInlineWidget('financing')" class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors font-medium">Financing</button>
+                        <button onclick="showInlineWidget('tradein')" class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors font-medium">Trade-in</button>
+                        <button onclick="showInlineWidget('attachment')" class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors font-medium">Attachment</button>
                     </div>
                 </div>
                 <div class="flex-grow border-t border-gray-200"></div>
@@ -687,7 +889,7 @@
     <div id="right-sidebar" class="w-80 sidebar-panel bg-white border-l border-gray-200 shrink-0 flex flex-col relative z-10 whitespace-nowrap">
         <!-- Header -->
         <div class="h-16 sidebar-header px-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center shrink-0">
-             <button onclick="toggleRightSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors" title="Toggle Sidebar">
+             <button onclick="toggleRightSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors" title="Toggle Sidebar">
                 <i id="right-toggle-icon" class="fa-solid fa-arrow-right-from-bracket transition-transform duration-300"></i>
             </button>
 
@@ -755,11 +957,36 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Spacer for Input removed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- DISQUALIFY MODAL OVERLAY -->
+    <div id="disqualify-modal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center animate-fade-in">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm mx-4 overflow-hidden transform transition-all scale-100">
+            <div class="p-5 border-b border-gray-100 bg-gray-50/50">
+                <h3 class="font-bold text-slate-800 text-lg">Disqualify Lead</h3>
+                <p class="text-xs text-gray-500 mt-1">Please select a reason for disqualification.</p>
+            </div>
+            
+            <div class="p-5">
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Failure Reason</label>
+                <select id="disqualify-reason" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 shadow-sm">
+                    <option value="Data cleanup">Data cleanup</option>
+                    <option value="Unreachable">Unreachable</option>
+                    <option value="Purchase postponed">Purchase postponed</option>
+                    <option value="Vehicle sold">Vehicle sold</option>
+                    <option value="Out of budget">Out of budget</option>
+                    <option value="Financing rejected">Financing rejected</option>
+                    <option value="Duplicate">Duplicate</option>
+                    <option value="Bought elsewhere">Bought elsewhere</option>
+                </select>
             </div>
 
-            <!-- Sticky Bottom Input removed -->
+            <div class="p-4 bg-gray-50 flex justify-end gap-3">
+                <button onclick="toggleDisqualifyModal()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-white hover:text-slate-800 border border-transparent hover:border-gray-200 rounded-lg transition-all">Cancel</button>
+                <button onclick="confirmDisqualification()" class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg shadow-sm shadow-red-200 transition-all">Confirm Disqualification</button>
+            </div>
         </div>
     </div>
 
@@ -779,6 +1006,48 @@
                 expander.style.paddingTop = '0';
                 expander.style.paddingBottom = '0';
             }
+        }
+
+        function toggleDisqualifyModal() {
+            const modal = document.getElementById('disqualify-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function confirmDisqualification() {
+            const reason = document.getElementById('disqualify-reason').value;
+            const stageText = document.querySelector('.text-xs.font-bold.text-slate-800'); // Targeted selector for stage text
+            const stageBar = document.querySelector('.bg-slate-600.rounded-full'); // Targeted selector for stage bar fill
+            
+            // 1. Update Stage Display
+            if(stageText && stageText.innerText === 'Open Lead') {
+                stageText.innerText = 'Disqualified';
+                stageText.classList.add('text-red-600');
+            }
+            if(stageBar) {
+                stageBar.classList.remove('bg-slate-600');
+                stageBar.classList.add('bg-red-500');
+                stageBar.parentElement.classList.add('bg-red-100');
+            }
+
+            // 2. Hide Manage Widget & Show Closed View
+            // Finding the manage widget by its content context since it doesn't have an ID
+            const mainContent = document.querySelector('main');
+            const manageWidget = Array.from(mainContent.children).find(child => 
+                child.querySelector('h3') && child.querySelector('h3').innerText === 'Manage this lead'
+            );
+            
+            if (manageWidget) {
+                manageWidget.classList.add('hidden');
+            }
+
+            const closedWidget = document.getElementById('closed-lead-widget');
+            const reasonDisplay = document.getElementById('disqualified-reason-display');
+            
+            reasonDisplay.innerText = reason;
+            closedWidget.classList.remove('hidden');
+
+            // 3. Close Modal
+            toggleDisqualifyModal();
         }
 
         function toggleAddNewMenu() {
@@ -923,6 +1192,212 @@
         function showTimeslots() {
             const slots = document.getElementById('opportunity-timeslots');
             slots.classList.remove('hidden');
+        }
+
+        // Inline Widgets Logic
+        function showInlineWidget(type) {
+            // Close menu
+            const menu = document.getElementById('add-new-menu');
+            menu.classList.remove('open');
+            
+            // Hide all widgets first
+            document.getElementById('inline-note-widget').classList.add('hidden');
+            document.getElementById('inline-attachment-widget').classList.add('hidden');
+            document.getElementById('inline-tradein-widget').classList.add('hidden');
+            document.getElementById('inline-financing-widget').classList.add('hidden');
+
+            // Show selected
+            if (type === 'note') {
+                document.getElementById('inline-note-widget').classList.remove('hidden');
+                document.getElementById('inline-note-input').focus();
+            } else if (type === 'attachment') {
+                document.getElementById('inline-attachment-widget').classList.remove('hidden');
+            } else if (type === 'tradein') {
+                document.getElementById('inline-tradein-widget').classList.remove('hidden');
+            } else if (type === 'financing') {
+                document.getElementById('inline-financing-widget').classList.remove('hidden');
+            }
+        }
+
+        function cancelInlineWidget(type) {
+            if (type === 'note') {
+                document.getElementById('inline-note-widget').classList.add('hidden');
+                document.getElementById('inline-note-input').value = '';
+            } else if (type === 'attachment') {
+                document.getElementById('inline-attachment-widget').classList.add('hidden');
+                document.getElementById('inline-file-input').value = '';
+                document.getElementById('file-name-display').innerText = 'SVG, PNG, JPG or PDF';
+            } else if (type === 'tradein') {
+                document.getElementById('inline-tradein-widget').classList.add('hidden');
+            } else if (type === 'financing') {
+                document.getElementById('inline-financing-widget').classList.add('hidden');
+            }
+        }
+
+        function updateFileName(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('file-name-display').innerText = input.files[0].name;
+            }
+        }
+
+        function saveInlineNote() {
+            const text = document.getElementById('inline-note-input').value;
+            if (!text.trim()) return;
+
+            const container = document.getElementById('inline-content-container');
+            
+            const noteHtml = `
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in">
+                    <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold shrink-0 border border-orange-200">JA</div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-xs font-bold text-slate-800">Josh Adams</span>
+                            <span class="text-[10px] text-gray-400">Just now</span>
+                        </div>
+                        <p class="text-sm text-slate-700">${text}</p>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML += noteHtml;
+            cancelInlineWidget('note');
+        }
+
+        function saveInlineAttachment() {
+            const fileInput = document.getElementById('inline-file-input');
+            const fileName = fileInput.files[0] ? fileInput.files[0].name : "Document.pdf";
+            
+            const container = document.getElementById('inline-content-container');
+            
+            const attachmentHtml = `
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in">
+                    <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-bold shrink-0 border border-blue-100">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold text-slate-800">Josh Adams</span>
+                            <span class="text-[10px] text-gray-400">added an attachment</span>
+                            <span class="text-[10px] text-gray-400">• Just now</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-lg p-2.5 hover:bg-blue-50/50 hover:border-blue-100 transition-colors group cursor-pointer">
+                            <div class="w-8 h-8 bg-white rounded border border-gray-200 flex items-center justify-center text-red-500 shadow-sm">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-slate-700 truncate group-hover:text-blue-700">${fileName}</p>
+                                <p class="text-[10px] text-gray-400">1.2 MB</p>
+                            </div>
+                            <i class="fa-solid fa-download text-gray-400 hover:text-blue-600 p-2"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML += attachmentHtml;
+            cancelInlineWidget('attachment');
+        }
+
+        function saveInlineTradeIn() {
+            const brand = document.getElementById('tradein-brand').value;
+            const model = document.getElementById('tradein-model').value || 'Unknown Model';
+            const km = document.getElementById('tradein-km').value || '0';
+            const year = document.getElementById('tradein-date').value ? new Date(document.getElementById('tradein-date').value).getFullYear() : 'Unknown Year';
+
+            const container = document.getElementById('inline-content-container');
+
+            const tradeInHtml = `
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in">
+                    <div class="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-xs font-bold shrink-0 border border-green-100">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold text-slate-800">Josh Adams</span>
+                            <span class="text-[10px] text-gray-400">added a trade-in</span>
+                            <span class="text-[10px] text-gray-400">• Just now</span>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-800">${brand} ${model}</h4>
+                                    <div class="text-xs text-gray-500 mt-1 flex gap-3">
+                                        <span><i class="fa-regular fa-calendar mr-1"></i>${year}</span>
+                                        <span><i class="fa-solid fa-road mr-1"></i>${km} km</span>
+                                    </div>
+                                </div>
+                                <span class="bg-white border border-gray-200 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded">Pending Eval</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML += tradeInHtml;
+            cancelInlineWidget('tradein');
+        }
+
+        function saveInlineFinancing() {
+            const product = document.getElementById('fin-product-name').value || 'Standard Financing';
+            const provider = document.getElementById('fin-provider-name').value || 'N/A';
+            const monthly = document.getElementById('fin-monthly-rate').value || '0';
+            const total = document.getElementById('fin-loan-amount').value || '0';
+
+            const container = document.getElementById('inline-content-container');
+
+            const financeHtml = `
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex gap-4 animate-fade-in">
+                    <div class="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-xs font-bold shrink-0 border border-purple-100">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold text-slate-800">Josh Adams</span>
+                            <span class="text-[10px] text-gray-400">added a financing proposal</span>
+                            <span class="text-[10px] text-gray-400">• Just now</span>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-sm font-bold text-slate-800">${product}</h4>
+                                <span class="bg-white border border-gray-200 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded">Draft</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="text-gray-500">Provider: <span class="font-medium text-slate-700">${provider}</span></div>
+                                <div class="text-gray-500 text-right">Loan: <span class="font-medium text-slate-700">€${total}</span></div>
+                                <div class="text-gray-500">Monthly: <span class="font-medium text-slate-700">€${monthly}/mo</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML += financeHtml;
+            cancelInlineWidget('financing');
+        }
+
+        // NEW FUNCTION: Save Call Note
+        function saveCallNote() {
+            const textarea = document.getElementById('quick-note-textarea');
+            const text = textarea.value;
+            
+            if (!text.trim()) return;
+
+            const container = document.getElementById('call-notes-container');
+            
+            // Create a read-only note styling
+            const noteHtml = `
+                <div class="bg-white border border-gray-200 rounded-lg p-3 shadow-sm animate-fade-in">
+                    <div class="flex items-center gap-2 mb-1">
+                        <div class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-[10px] font-bold">K</div>
+                        <span class="text-[10px] font-bold text-slate-700">You</span>
+                        <span class="text-[10px] text-gray-400">• Just now</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">${text}</p>
+                </div>
+            `;
+            
+            container.innerHTML += noteHtml;
+            textarea.value = ''; // Clear input
         }
 
         function toggleCallWidget() {

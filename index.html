@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Management CRM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Accordion Animations */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        
+        /* Animation for the car widget content */
+        details[open] summary ~ .content-sweep { animation: sweep .2s ease-in-out; }
+        
+        /* Specific rotation for car widget chevron */
+        details summary .chevron-car { transition: transform 0.2s; }
+        details[open] summary .chevron-car { transform: rotate(180deg); }
+
+        /* Top Contact Expander Animation */
+        #contact-expander {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #contact-expander.expanded {
+            max-height: 200px; /* approximate height */
+            opacity: 1;
+        }
+        
+        .rotate-icon { transition: transform 0.3s; }
+        .rotate-icon.rotated { transform: rotate(180deg); }
+
+        /* Dropdown Animation */
+        #add-new-menu {
+            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+            transform: translateY(-10px) translateX(-50%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        #add-new-menu.open {
+            transform: translateY(0) translateX(-50%);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Sidebar Transitions */
+        .sidebar-panel {
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        
+        /* Transition for sidebar content opacity/visibility */
+        .sidebar-content-wrapper {
+            transition: opacity 0.2s ease-in-out;
+            opacity: 1;
+            width: 20rem; /* Fixed width to prevent reflow during collapse */
+        }
+        .sidebar-collapsed .sidebar-content-wrapper {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Sidebar Header adjustments for collapsed state */
+        .sidebar-header {
+            transition: padding 0.3s ease;
+        }
+        .sidebar-collapsed .sidebar-header {
+            justify-content: center;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .sidebar-collapsed .header-text {
+            display: none;
+        }
+
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-5px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex overflow-hidden text-slate-800">
+
+    <!-- 1. NAVIGATION SIDEBAR (Fixed) -->
+    <div class="w-16 bg-[#0f172a] flex flex-col items-center py-5 gap-6 text-gray-400 shrink-0 z-20">
+        <!-- Replaced blue-600 with slate-600 -->
+        <div class="w-9 h-9 bg-slate-600 rounded-lg flex items-center justify-center text-white mb-2 cursor-pointer shadow-lg shadow-slate-900/50">
+            <i class="fa-solid fa-bolt"></i>
+        </div>
+        <i class="fa-solid fa-house hover:text-white cursor-pointer transition-colors"></i>
+        <i class="fa-solid fa-tag text-white cursor-pointer relative">
+             <!-- Replaced blue-500 with gray-400 -->
+             <div class="absolute -right-2 top-0 w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+        </i>
+        <i class="fa-solid fa-wrench hover:text-white cursor-pointer transition-colors"></i>
+        <i class="fa-regular fa-calendar hover:text-white cursor-pointer transition-colors"></i>
+        <div class="mt-auto pb-4 flex flex-col gap-6">
+            <i class="fa-solid fa-gear hover:text-white cursor-pointer transition-colors"></i>
+            <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold border-2 border-[#0f172a]">K</div>
+        </div>
+    </div>
+
+    <!-- 2. LEADS LIST SIDEBAR (Collapsible) -->
+    <div id="left-sidebar" class="w-80 sidebar-panel bg-white border-r border-gray-200 flex flex-col shrink-0 z-10">
+        <!-- Sidebar Header -->
+        <div class="h-16 sidebar-header px-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50 shrink-0">
+            <div class="flex items-center gap-3 header-text overflow-hidden whitespace-nowrap">
+                <h2 class="font-bold text-lg text-slate-800">Open leads</h2>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <button class="header-text text-xs font-medium bg-white hover:bg-gray-50 px-3 py-1.5 rounded-md flex items-center gap-2 text-gray-600 border border-gray-200 transition-colors shadow-sm whitespace-nowrap">
+                    Urgent first <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                </button>
+                <!-- Close/Expand Button -->
+                <!-- Replaced blue hovers with gray -->
+                <button onclick="toggleLeftSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors" title="Toggle Sidebar">
+                    <i id="left-toggle-icon" class="fa-solid fa-arrow-right-from-bracket rotate-180 transition-transform duration-300"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Sidebar Content Wrapper -->
+        <div class="sidebar-content-wrapper flex flex-col flex-1 overflow-hidden">
+            <div class="px-5 py-3">
+                <div class="relative group">
+                    <!-- Replaced blue focus text with gray -->
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm group-focus-within:text-gray-600 transition-colors"></i>
+                    <!-- Replaced blue focus border with gray -->
+                    <input type="text" placeholder="Search..." class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:border-gray-400 focus:bg-white transition-all placeholder-gray-400">
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto px-4 space-y-3 pb-4">
+                <!-- Active Card (Now Grey Theme) -->
+                <!-- Replaced border-blue-500, shadow-blue-100 with border-gray-400, shadow-gray-200 -->
+                <div class="bg-white border-2 border-gray-400 rounded-xl p-3 shadow-md shadow-gray-200 cursor-pointer relative transition-transform active:scale-[0.98]">
+                    <div class="flex justify-between mb-2">
+                        <span class="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">Open</span>
+                        <span class="bg-red-50 text-red-500 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">Due in 1h 12m</span>
+                    </div>
+                    <div class="flex items-center gap-3 mb-1.5">
+                        <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold border border-orange-200">JA</div>
+                        <div>
+                            <div class="font-bold text-gray-800 text-sm leading-tight">Josh Adams</div>
+                            <div class="flex items-center gap-1.5 text-gray-600 text-xs mt-0.5">
+                                <i class="fa-brands fa-volkswagen text-gray-400"></i>
+                                <span class="font-medium">Volkswagen ID.4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Inactive Cards -->
+                 <!-- Replaced hover:border-blue-300 with hover:border-gray-300 -->
+                 <div class="bg-white border border-gray-200 hover:border-gray-300 rounded-xl p-3 cursor-pointer opacity-80 hover:opacity-100 transition-all">
+                    <div class="flex justify-between mb-2">
+                        <span class="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">Open</span>
+                        <span class="bg-red-50 text-red-500 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">Due in 4h 20m</span>
+                    </div>
+                    <div class="flex items-center gap-3 mb-1.5">
+                        <!-- Replaced blue accents with gray -->
+                        <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center text-xs font-bold border border-gray-200">MS</div>
+                        <div>
+                            <div class="font-bold text-gray-800 text-sm leading-tight">Maria Smith</div>
+                            <div class="flex items-center gap-1.5 text-gray-600 text-xs mt-0.5">
+                                <i class="fa-solid fa-car text-gray-400"></i>
+                                <span class="font-medium">Audi Q3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. MAIN WORKSPACE (Center) -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden bg-[#f8fafc] relative border-r border-gray-200">
+        
+        <!-- HEADER & CONTACT EXPANDER WRAPPER -->
+        <header class="bg-white border-b border-gray-200 shrink-0 z-30 shadow-sm relative">
+            <div class="px-8 pt-6 pb-2">
+                <!-- Top Row: Name & Actions -->
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-lg font-bold border-2 border-white shadow-sm shrink-0">JA</div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h1 class="text-xl font-bold text-slate-900">Josh Adams</h1>
+                               
+                            </div>
+                            <div class="flex gap-2 mt-1">
+                                <span class="px-2 py-0.5 rounded border border-teal-200 bg-teal-50 text-teal-700 text-xs font-medium">Nurturing</span>
+                                <span class="px-2 py-0.5 rounded border border-orange-200 bg-orange-50 text-orange-700 text-xs font-medium">New customer</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex items-center gap-2">
+                        <!-- Replaced hover:bg-gray-50 which was already fine, just standardizing -->
+                        <button class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm" title="Call">
+                            <i class="fa-solid fa-phone text-sm"></i>
+                        </button>
+                        <button class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm" title="Email">
+                            <i class="fa-solid fa-envelope text-sm"></i>
+                        </button>
+                        <button class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm" title="Schedule">
+                            <i class="fa-solid fa-calendar text-sm"></i>
+                        </button>
+                        <button class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 text-gray-600 transition-all shadow-sm">
+                            <i class="fa-solid fa-ellipsis text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MOVED: STAGE & OWNER BAR (Redesigned Compact Row) -->
+                <div class="flex items-center justify-between mt-3 mb-2">
+                    <div class="inline-flex items-center bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                        <!-- Stage Section -->
+                        <div class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer transition-colors">
+                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Stage</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-slate-800">Open Lead</span>
+                                <div class="w-8 h-1 bg-gray-100 rounded-full overflow-hidden">
+                                    <div class="h-full w-1/3 bg-slate-600 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Divider -->
+                        <div class="w-px h-4 bg-gray-200"></div>
+                        
+                        <!-- Owner Section -->
+                        <div class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer transition-colors">
+                             <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Owner</span>
+                             <div class="flex items-center gap-1.5">
+                                <div class="w-4 h-4 bg-gray-100 rounded-full text-[9px] flex items-center justify-center font-bold text-gray-600 border border-gray-200">MT</div>
+                                <span class="text-xs font-bold text-slate-800">Michael Thomas</span>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Expand Button (Moved Here) -->
+                    <button onclick="toggleContactInfo()" class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 transition-colors focus:outline-none" title="Show contact details">
+                        <i id="contact-toggle-icon" class="fa-solid fa-chevron-down text-xs rotate-icon"></i>
+                    </button>
+                </div>
+
+                <!-- HIDDEN CONTACT EXPANDER (Slides down) -->
+                <div id="contact-expander" class="border-t border-dashed border-gray-200 -mx-4 px-4 bg-slate-50/50">
+                    <div class="py-4 grid grid-cols-3 gap-6 max-w-2xl">
+                        <!-- Email -->
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-1">Email Address</span>
+                            <!-- Replaced group-hover:text-blue-500 with text-gray-600 -->
+                            <div class="text-sm font-medium text-slate-700 flex items-center gap-2 group cursor-pointer">
+                                manuela.m@gmail.com
+                                <i class="fa-regular fa-copy text-gray-300 group-hover:text-gray-600 text-xs"></i>
+                            </div>
+                        </div>
+                        <!-- Phone -->
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-1">Phone Number</span>
+                            <div class="text-sm font-medium text-slate-700 flex items-center gap-2 group cursor-pointer">
+                                +1 234 567 89
+                                <i class="fa-brands fa-whatsapp text-green-500 text-xs group-hover:scale-110 transition-transform"></i>
+                            </div>
+                        </div>
+                        <!-- Address -->
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-1">Address</span>
+                            <div class="text-sm font-medium text-slate-700">
+                                Via Torino 56, 20123 Milan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEPARATOR LINE -->
+                <div class="border-b border-gray-200 mb-4 mt-2"></div>
+
+                <!-- Tabs -->
+                <!-- Replaced blue borders/text with gray/slate -->
+                <div class="flex gap-8 text-sm font-medium text-gray-500 mt-2 overflow-x-auto">
+                    <div class="pb-3 border-b-2 border-slate-700 text-slate-800 cursor-pointer whitespace-nowrap">Overview <span class="ml-1 bg-gray-200 text-gray-800 text-[10px] px-1.5 py-0.5 rounded-full">1</span></div>
+                    <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Communication <span class="ml-1 bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded-full">2</span></div>
+                    <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Notes</div>
+                    <div class="pb-3 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 cursor-pointer transition-all whitespace-nowrap">Attachments</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 max-w-4xl mx-auto w-full">
+            
+            <!-- NEW WIDGET: REQUESTED CAR (Rich Header Expander) -->
+            <details class="bg-white border border-gray-200 rounded-xl shadow-sm mb-6 group overflow-hidden">
+                <!-- Rich Summary: Visible by Default -->
+                <summary class="block p-4 cursor-pointer select-none bg-white hover:bg-gray-50 transition-colors">
+                    
+                    <!-- MOVED: Request Message Area (Now on Top) -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-3 shadow-sm relative mb-4">
+                        <div class="text-xs font-medium text-gray-400 mb-1">Request message</div>
+                        <p class="text-sm text-slate-700 leading-snug">Hello, I would love to know the details about the car: What is the suspension?</p>
+                    </div>
+
+                    <!-- Top Row: Car Info & Actions -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <!-- Thumbnail visible in collapsed state -->
+                            <div class="w-16 h-12 bg-gray-200 rounded-md overflow-hidden shrink-0 border border-gray-100">
+                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5ap8dR1YoIY8e1Yopb3EojZi1LTuCvzymmg&s" alt="Audi A6" class="w-full h-full object-cover">
+                            </div>
+                            
+                            <div>
+                                <div class="text-xs text-gray-500 font-medium mb-0.5">Requested Car</div>
+                                <div class="font-bold text-slate-800 text-sm md:text-base">Audi A6 Allroad (2023)</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <!-- NEW BUTTON: Open Ad -->
+                            <!-- Replaced hover:text-blue with hover:text-gray -->
+                            <button class="hidden sm:flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 border border-gray-200 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors group/btn">
+                                Open Ad <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400 group-hover/btn:text-gray-800"></i>
+                            </button>
+
+                            <div class="text-right hidden md:block">
+                                <div class="text-xs text-gray-500 font-medium mb-0.5">Price</div>
+                                <div class="font-bold text-slate-800">€ 19.000</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down chevron-car text-gray-400 text-sm ml-2"></i>
+                        </div>
+                    </div>
+                </summary>
+                
+                <!-- Expanded Content: Hidden by Default -->
+                <div class="border-t border-gray-100 p-5 bg-gray-50/30 content-sweep">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+                        
+                        <!-- Extra Car Data -->
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-400 mb-1">Status</label>
+                                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-50 border border-green-100 text-green-700 text-xs font-semibold rounded-md">
+                                    <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div> In stock (412 days)
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-400 mb-1">VIN Number</label>
+                                <div class="text-xs font-mono bg-white border border-gray-200 px-2 py-1.5 rounded inline-block text-gray-600 shadow-sm">
+                                    7015733W8749
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Car Actions -->
+                        <div class="flex flex-col justify-center space-y-3">
+                             <!-- Replaced hover:text-blue with hover:text-gray -->
+                             <button class="w-full bg-white border border-gray-200 text-slate-700 hover:text-gray-900 hover:border-gray-400 font-medium px-4 py-2 rounded-lg text-sm transition-colors flex items-center justify-between group">
+                                <span>View technical specs</span>
+                                <i class="fa-solid fa-list-check text-xs text-gray-400 group-hover:text-gray-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- EXISTING WIDGET: MANAGE THIS LEAD -->
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-8">
+                <!-- Replaced bg-blue-50/50 with bg-gray-50/50 -->
+                <div class="p-4 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
+                     <h3 class="font-bold text-slate-800 text-sm">Manage this lead</h3>
+                     <!-- Replaced bg-blue-100 text-blue-700 with bg-gray-200 text-gray-800 -->
+                     <span class="text-xs bg-gray-200 text-gray-800 px-2 py-0.5 rounded font-medium">Task pending</span>
+                </div>
+                
+                <div class="p-5 space-y-6">
+                    <!-- Task -->
+                    <!-- Replaced blue classes with gray/slate -->
+                    <div class="bg-gray-50/50 border border-gray-200 rounded-lg p-4 relative transition-all duration-300">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Next Step: Initial Contact</h4>
+                                <p class="text-xs text-gray-500 mt-0.5">Call customer to discuss Audi A6 interest.</p>
+                            </div>
+                            <!-- CHANGED: Status Badge with ID (Orange remains orange as it is a status) -->
+                            <div id="call-status-badge" class="flex items-center gap-2 text-orange-600 bg-white border border-orange-100 px-2 py-1 rounded text-xs font-semibold shadow-sm transition-colors">
+                                To be contacted <i class="fa-regular fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <!-- Replaced bg-blue-600 with bg-slate-700 -->
+                            <button onclick="toggleCallWidget()" class="bg-slate-700 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors shadow-sm shadow-gray-200">
+                              +4901564879300  Call <i class="fa-solid fa-phone text-xs"></i>
+                            </button>
+                            <button class="bg-white hover:bg-gray-50 border border-gray-200 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors">
+                                Copy number <i class="fa-regular fa-copy text-xs"></i>
+                            </button>
+                            <!-- NEW BUTTON: Take Notes -->
+                            <button onclick="toggleNoteInput()" class="bg-white hover:bg-gray-50 border border-gray-200 text-slate-700 font-medium px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors">
+                                Take notes <i class="fa-solid fa-pen text-xs"></i>
+                            </button>
+                        </div>
+
+                        <!-- LIVE TRANSCRIPTION PANEL (Hidden by default) -->
+                        <div id="call-transcription-panel" class="hidden mt-4 bg-slate-900 border border-slate-700 rounded-lg p-4 shadow-inner relative overflow-hidden">
+                             <!-- Header -->
+                             <div class="flex justify-between items-center mb-3 border-b border-slate-700 pb-2">
+                                <div class="flex items-center gap-2">
+                                    <!-- Replaced text-blue-400 with text-gray-400 -->
+                                    <i class="fa-solid fa-wave-square text-gray-400 text-xs"></i>
+                                    <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Live Transcription</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <span class="relative flex h-2 w-2">
+                                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                      <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                    </span>
+                                    <span class="text-xs font-mono text-red-400">REC 00:<span id="call-timer">00</span></span>
+                                </div>
+                            </div>
+                            
+                            <!-- Streaming Text Area (Fixed Height for ~4 lines) -->
+                            <div id="transcription-content" class="space-y-2 h-32 overflow-hidden flex flex-col justify-end">
+                                <!-- Sentences injected here by JS -->
+                            </div>
+                            
+                            <!-- Simple Visualizer Decoration -->
+                            <div class="absolute bottom-0 left-0 right-0 h-1 flex items-end opacity-20 gap-0.5 pointer-events-none z-0">
+                                <!-- Replaced blue-500 with gray-500 -->
+                                <div class="w-full bg-gray-500 h-2 animate-pulse"></div>
+                                <div class="w-full bg-gray-500 h-4 animate-pulse" style="animation-delay: 0.1s"></div>
+                                <div class="w-full bg-gray-500 h-3 animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-full bg-gray-500 h-5 animate-pulse" style="animation-delay: 0.3s"></div>
+                                <div class="w-full bg-gray-500 h-2 animate-pulse" style="animation-delay: 0.4s"></div>
+                            </div>
+                        </div>
+
+                        <!-- MOVED: Quick Note Input (Outside & Below) -->
+                        <div id="call-note-input" class="hidden mt-3 relative z-10">
+                            <div class="relative">
+                                <!-- Replaced border-blue-200 with border-gray-300 and focus:border-blue-500 with focus:border-gray-500 -->
+                                <textarea placeholder="Add a quick note about this call..." rows="3" class="w-full bg-white border border-gray-300 rounded-md pl-3 pr-8 py-2 text-xs text-slate-700 focus:outline-none focus:border-gray-500 placeholder-gray-400 transition-colors shadow-sm resize-none"></textarea>
+                                <!-- CHANGED: Send Icon without background -->
+                                <!-- Replaced text-blue-400 hover:text-blue-600 with text-gray-400 hover:text-gray-600 -->
+                                <button class="absolute right-2 bottom-2 text-gray-400 hover:text-gray-600 p-1.5 transition-colors" title="Save Note">
+                                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Footer Actions & Reschedule -->
+                <div class="bg-gray-50 border-t border-gray-200">
+                    <div class="p-4 flex justify-end gap-3">
+                        <!-- NEW: Postpone Button -->
+                        <button onclick="toggleRescheduleWidget()" class="bg-white hover:bg-gray-50 text-slate-700 border border-gray-200 font-medium px-4 py-2.5 rounded-lg text-sm shadow-sm transition-colors flex items-center gap-2">
+                            Postpone <i class="fa-regular fa-clock"></i>
+                        </button>
+                        
+                        <!-- UPDATED: Complete Button (Green) -->
+                        <button class="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2.5 rounded-lg text-sm shadow-lg shadow-green-200 transition-colors flex items-center gap-2">
+                            Complete <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+
+                    <!-- NEW: Reschedule Widget (Hidden) -->
+                    <div id="reschedule-widget" class="hidden border-t border-gray-200 p-5 bg-white transition-all">
+                        <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Reschedule to...</h5>
+                        
+                        <!-- Quick Presets -->
+                        <div class="grid grid-cols-3 gap-3 mb-4">
+                            <!-- Replaced hover:border-blue-400 hover:bg-blue-50 group-hover:text-blue-700 with gray versions -->
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Later Today</span>
+                                <span class="text-[10px] text-gray-400">+2 Hours</span>
+                            </button>
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Tomorrow</span>
+                                <span class="text-[10px] text-gray-400">09:00 AM</span>
+                            </button>
+                            <button class="flex flex-col items-center justify-center p-2 border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all group">
+                                <span class="text-xs font-semibold text-slate-700 group-hover:text-gray-900">Next Week</span>
+                                <span class="text-[10px] text-gray-400">Mon, 9 AM</span>
+                            </button>
+                        </div>
+
+                        <!-- Custom Date/Time -->
+                        <div class="flex gap-3 mb-4">
+                            <!-- Replaced focus:border-blue-500 with focus:border-gray-400 -->
+                            <input type="date" class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-gray-400 focus:outline-none">
+                            <input type="time" class="w-1/3 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:border-gray-400 focus:outline-none">
+                        </div>
+                        
+                        <!-- ADDED: onclick event to close the widget -->
+                        <button onclick="toggleRescheduleWidget()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2 rounded-lg text-sm transition-colors">
+                            Confirm New Time
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- "Add New" Divider Button -->
+            <div class="relative flex items-center py-4 mb-8">
+                <div class="flex-grow border-t border-gray-200"></div>
+                <div class="relative mx-4">
+                    <button onclick="toggleAddNewMenu()" class="bg-gray-50 hover:bg-white border border-gray-200 text-slate-700 font-medium px-4 py-1.5 rounded-full text-sm shadow-sm transition-all flex items-center gap-2 z-20 relative">
+                        <i class="fa-solid fa-plus text-xs"></i> Add new
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div id="add-new-menu" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg shadow-gray-100/50 z-10 overflow-hidden flex flex-col p-1">
+                        <!-- Replaced hover:text-blue-600 with hover:text-gray-900 -->
+                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Note</button>
+                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Purchase option</button>
+                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Trade-in</button>
+                        <button class="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors font-medium">Attachment</button>
+                    </div>
+                </div>
+                <div class="flex-grow border-t border-gray-200"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 4. RIGHT ACTIVITY PANEL (Collapsible) -->
+    <div id="right-sidebar" class="w-80 sidebar-panel bg-white border-l border-gray-200 shrink-0 flex flex-col relative z-10 whitespace-nowrap">
+        <!-- Header -->
+        <div class="h-16 sidebar-header px-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center shrink-0">
+            <!-- Close/Expand Button (Left side of header in right panel for balance? Or Right side? Usually left for collapsing right panel) -->
+            <!-- Placing it on Left to match direction: < ] -->
+             <!-- Replaced hover:text-blue-600 hover:bg-blue-50 with gray -->
+             <button onclick="toggleRightSidebar()" class="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors" title="Toggle Sidebar">
+                <i id="right-toggle-icon" class="fa-solid fa-arrow-right-from-bracket transition-transform duration-300"></i>
+            </button>
+
+            <h2 class="header-text font-bold text-lg text-slate-800">Activity summary</h2>
+        </div>
+
+        <!-- Sidebar Content Wrapper -->
+        <div class="sidebar-content-wrapper flex flex-col flex-1 overflow-hidden">
+            <!-- Scrollable Timeline -->
+            <div class="flex-1 overflow-y-auto px-5 py-6 relative">
+                <!-- Connector Line -->
+                <div class="absolute left-[39px] top-6 bottom-0 w-0.5 bg-gray-200"></div>
+
+                <!-- Group: Today (Example date from image logic) -->
+                <div class="mb-8 relative">
+                    <h3 class="text-sm font-semibold text-gray-800 mb-4 pl-12">Tuesday 25 March 2025</h3>
+                    
+                    <!-- Item: Call -->
+                    <div class="flex gap-4 relative mb-6">
+                        <div class="w-10 h-10 rounded-full bg-red-50 border border-red-100 text-red-500 flex items-center justify-center shrink-0 z-10 relative">
+                            <i class="fa-solid fa-phone-slash text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-slate-700 leading-snug">
+                                <span class="font-bold">Natalia Sung</span> made an unsuccessful call attempt
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">08:47</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group: Yesterday -->
+                <div class="mb-8 relative">
+                    <h3 class="text-sm font-semibold text-gray-800 mb-4 pl-12">Monday 24 March 2025</h3>
+                    
+                    <!-- Item: Note -->
+                    <div class="flex gap-4 relative mb-6">
+                        <div class="w-10 h-10 rounded-full bg-orange-50 border border-orange-100 text-orange-500 flex items-center justify-center shrink-0 z-10 relative">
+                            <i class="fa-regular fa-note-sticky text-sm"></i>
+                        </div>
+                        <div class="w-full">
+                            <div class="flex justify-between items-start">
+                                <div class="text-sm text-slate-700">
+                                    <span class="font-bold">Natalia Sung</span> added a note
+                                </div>
+                                <span class="text-xs text-gray-400">08:43</span>
+                            </div>
+                            <!-- Note Card -->
+                            <div class="mt-2 bg-orange-50/50 border border-orange-100 p-3 rounded-lg text-sm text-gray-700">
+                                Customer prefers phone contact in the afternoon.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item: System Event (Lead Created) -->
+                    <div class="flex gap-4 relative mb-8">
+                        <div class="w-10 h-10 rounded-full bg-gray-100 border border-gray-200 text-gray-500 flex items-center justify-center shrink-0 z-10 relative">
+                            <i class="fa-solid fa-car text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-slate-700 leading-snug">
+                                <span class="font-bold">Lead</span> was created coming from Summer Sale Campaign
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">07:22</div>
+                        </div>
+                    </div>
+
+                    <!-- NEXT TASK WIDGET (Floating in stream) -->
+                    <!-- Replaced shadow-blue-50/50 with shadow-gray-200 -->
+                    <div class="bg-white border border-gray-200 shadow-lg shadow-gray-200 rounded-xl p-4 relative z-20 mb-4 ml-2">
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs">
+                                    <i class="fa-solid fa-bell"></i>
+                                </div>
+                                <span class="font-bold text-sm text-slate-800">Next Task</span>
+                            </div>
+                            <!-- Replaced bg-blue-600 hover:bg-blue-700 with bg-slate-700 hover:bg-slate-800 -->
+                            <button class="bg-slate-700 hover:bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded transition-colors">
+                                Complete
+                            </button>
+                        </div>
+                        <div class="font-bold text-slate-800 text-sm mb-1">Task: Lead Qualification Call</div>
+                        <div class="text-xs text-gray-500 mb-2">Due: Today, 4:00 PM</div>
+                        <div class="text-xs text-gray-400 italic mb-3 border-l-2 border-gray-200 pl-2">
+                            Notes: Validate budget and delivery timeline.
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-medium py-1.5 rounded transition-colors">Postpone</button>
+                            <!-- Replaced text-blue-600 with text-gray-700 -->
+                            <button class="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 text-xs font-medium py-1.5 rounded transition-colors">View All Tasks</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Spacer for Input -->
+                <div class="h-16"></div>
+            </div>
+
+            <!-- Sticky Bottom Input -->
+            <div class="p-4 border-t border-gray-200 bg-white absolute bottom-0 w-full z-30">
+                <div class="relative">
+                    <!-- Replaced focus:border-blue-500 with focus:border-gray-400 -->
+                    <input type="text" placeholder="Add a note..." class="w-full bg-gray-50 border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-gray-400 focus:bg-white shadow-sm transition-all">
+                    <!-- Replaced hover:text-blue-600 with hover:text-gray-900 -->
+                    <button class="absolute right-2 top-2 text-gray-400 hover:text-gray-900 p-1">
+                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to handle custom interactions -->
+    <script>
+        function toggleContactInfo() {
+            const expander = document.getElementById('contact-expander');
+            const icon = document.getElementById('contact-toggle-icon');
+            
+            expander.classList.toggle('expanded');
+            icon.classList.toggle('rotated');
+            
+            if(expander.classList.contains('expanded')) {
+                expander.style.paddingTop = '1rem';
+                expander.style.paddingBottom = '1rem';
+            } else {
+                expander.style.paddingTop = '0';
+                expander.style.paddingBottom = '0';
+            }
+        }
+
+        function toggleAddNewMenu() {
+            const menu = document.getElementById('add-new-menu');
+            menu.classList.toggle('open');
+            
+            // Close menu when clicking outside
+            if (menu.classList.contains('open')) {
+                document.addEventListener('click', closeMenuOutside);
+            } else {
+                document.removeEventListener('click', closeMenuOutside);
+            }
+        }
+
+        function closeMenuOutside(event) {
+            const menu = document.getElementById('add-new-menu');
+            const button = event.target.closest('button[onclick="toggleAddNewMenu()"]');
+            
+            // If click is not inside menu and not on the button
+            if (!menu.contains(event.target) && !button) {
+                menu.classList.remove('open');
+                document.removeEventListener('click', closeMenuOutside);
+            }
+        }
+
+        // Toggle Sidebar Functions
+        function toggleLeftSidebar() {
+            const sb = document.getElementById('left-sidebar');
+            const icon = document.getElementById('left-toggle-icon');
+            
+            // Check if currently expanded (w-80)
+            if (sb.classList.contains('w-80')) {
+                // COLLAPSE
+                sb.classList.remove('w-80');
+                sb.classList.add('w-16', 'sidebar-collapsed');
+                // Remove rotation (point right) to indicate "Expand"
+                icon.classList.remove('rotate-180');
+            } else {
+                // EXPAND
+                sb.classList.add('w-80');
+                sb.classList.remove('w-16', 'sidebar-collapsed');
+                // Add rotation (point left) to indicate "Collapse"
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        function toggleRightSidebar() {
+            const sb = document.getElementById('right-sidebar');
+            const icon = document.getElementById('right-toggle-icon');
+
+            if (sb.classList.contains('w-80')) {
+                // COLLAPSE
+                sb.classList.remove('w-80');
+                sb.classList.add('w-16', 'sidebar-collapsed');
+                // Add rotation (point left) to indicate "Expand" (since default was right)
+                // Wait, right side default icon points Right [ ->
+                // To collapse (move right), it points Right.
+                // To expand (move left), it needs to point Left [ <-
+                
+                // So when collapsed, we want arrow Left. 
+                icon.classList.add('rotate-180'); 
+            } else {
+                // EXPAND
+                sb.classList.add('w-80');
+                sb.classList.remove('w-16', 'sidebar-collapsed');
+                // Remove rotation (point right) to indicate "Collapse"
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // LIVE CALL TRANSCRIPTION WIDGET LOGIC
+        let transcriptionInterval;
+        let timerInterval;
+        let seconds = 0;
+        
+        const conversation = [
+            { speaker: "Sales", text: "Good morning, am I speaking with Mr. Adams?" },
+            { speaker: "Lead", text: "Yes, this is Josh Adams speaking." },
+            { speaker: "Sales", text: "Hi Josh, Michael here regarding your Audi A6 inquiry." },
+            { speaker: "Lead", text: "Oh, hi Michael! Yes, I was waiting for your call." },
+            { speaker: "Sales", text: "Great. I saw you had a question about the suspension?" },
+            { speaker: "Lead", text: "Exactly. Does this model have the adaptive air suspension?" },
+            { speaker: "Sales", text: "It does indeed. It's the Allroad trim, so it's standard." },
+            { speaker: "Lead", text: "That is perfect. And what about the delivery time?" },
+            { speaker: "Sales", text: "We have it in stock, so we can deliver within 2 weeks." },
+            { speaker: "Lead", text: "Sounds amazing. Let's proceed with the paperwork." }
+        ];
+
+        function toggleNoteInput() {
+            const noteInput = document.getElementById('call-note-input');
+            noteInput.classList.toggle('hidden');
+        }
+
+        function toggleRescheduleWidget() {
+            const widget = document.getElementById('reschedule-widget');
+            widget.classList.toggle('hidden');
+        }
+
+        function toggleCallWidget() {
+            const panel = document.getElementById('call-transcription-panel');
+            // Removed noteInput logic from here to make it independent
+            const content = document.getElementById('transcription-content');
+            const timerDisplay = document.getElementById('call-timer');
+            const badge = document.getElementById('call-status-badge');
+            
+            if (panel.classList.contains('hidden')) {
+                // Open Widget
+                panel.classList.remove('hidden');
+                
+                // UPDATE BADGE: In Call
+                // Replaced text-blue-600 bg-blue-50 border-blue-100 with text-gray-800 bg-gray-100 border-gray-200
+                badge.innerHTML = 'In Call <i class="fa-solid fa-phone-volume animate-pulse"></i>';
+                badge.className = "flex items-center gap-2 text-gray-800 bg-gray-100 border border-gray-200 px-2 py-1 rounded text-xs font-semibold shadow-sm transition-colors";
+                
+                // Reset State
+                content.innerHTML = '<div class="text-xs text-slate-500 font-mono italic mb-2">Connecting...</div>';
+                seconds = 0;
+                let lineIndex = 0;
+                
+                // Start Timer
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    timerDisplay.innerText = seconds.toString().padStart(2, '0');
+                }, 1000);
+
+                // Start Streaming Text
+                transcriptionInterval = setInterval(() => {
+                    if (lineIndex < conversation.length) {
+                        const line = conversation[lineIndex];
+                        const div = document.createElement('div');
+                        div.className = "text-xs font-mono transition-all duration-500 transform translate-y-2 opacity-0";
+                        
+                        // Color code speakers for clarity in dark mode
+                        // Replaced text-blue-400 with text-gray-400
+                        const color = line.speaker === 'Sales' ? 'text-gray-400' : 'text-slate-300';
+                        div.innerHTML = `<span class="${color} font-bold">${line.speaker}:</span> <span class="text-slate-200">${line.text}</span>`;
+                        
+                        content.appendChild(div);
+                        
+                        // Trigger animation
+                        requestAnimationFrame(() => {
+                            div.classList.remove('translate-y-2', 'opacity-0');
+                        });
+
+                        // Keep only last 4 lines visible
+                        if (content.children.length > 4) {
+                            content.removeChild(content.firstChild);
+                        }
+                        
+                        lineIndex++;
+                    } else {
+                        clearInterval(transcriptionInterval);
+                    }
+                }, 2500); // Add new line every 2.5 seconds
+
+            } else {
+                // Close Widget
+                panel.classList.add('hidden');
+                // Note input remains in its current state (visible or hidden) based on user's manual toggle
+                
+                // REVERT BADGE: To be contacted (or Contacted if you prefer logic state change)
+                badge.innerHTML = 'To be contacted <i class="fa-regular fa-clock"></i>';
+                badge.className = "flex items-center gap-2 text-orange-600 bg-white border border-orange-100 px-2 py-1 rounded text-xs font-semibold shadow-sm transition-colors";
+
+                clearInterval(transcriptionInterval);
+                clearInterval(timerInterval);
+            }
+        }
+    </script>
+</body>
+</html>

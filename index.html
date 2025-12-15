@@ -634,50 +634,79 @@
 
                     <!-- Create Opportunity Widget (Hidden) -->
                     <div id="opportunity-widget" class="hidden border-t border-gray-200 p-5 bg-white transition-all">
-                        <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Schedule Appointment</h5>
-                        <div class="mb-4">
-                            <label class="block text-xs font-medium text-gray-500 mb-1.5">Appointment Type</label>
-                            <div class="relative">
-                                <select class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none appearance-none cursor-pointer transition-colors shadow-sm">
-                                    <option value="" disabled selected>Select type...</option>
-                                    <option>Showroom Visit</option>
-                                    <option>Test Drive</option>
-                                    <option>Video Call</option>
-                                    <option>Home Visit</option>
-                                </select>
-                                <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-xs text-gray-400 pointer-events-none"></i>
+                        <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Create Opportunity</h5>
+                        
+                        <!-- Step 1: Qualification Method -->
+                        <div class="mb-5">
+                            <label class="block text-xs font-medium text-gray-500 mb-2">Next Step</label>
+                            <div class="flex flex-col gap-2">
+                                <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors bg-white shadow-sm">
+                                    <input type="radio" name="opportunity-type" value="qualify" class="w-4 h-4 text-green-600 focus:ring-green-500 border-gray-300" onchange="toggleAppointmentForm(this.value)" checked>
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-medium text-slate-700">Qualify without appointment</span>
+                                        <span class="text-[10px] text-gray-400">Proceed directly to opportunity stage</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors bg-white shadow-sm">
+                                    <input type="radio" name="opportunity-type" value="schedule" class="w-4 h-4 text-green-600 focus:ring-green-500 border-gray-300" onchange="toggleAppointmentForm(this.value)">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-medium text-slate-700">Schedule Appointment</span>
+                                        <span class="text-[10px] text-gray-400">Book a meeting or test drive</span>
+                                    </div>
+                                </label>
                             </div>
                         </div>
-                        <!-- NEW: Assign Salesman -->
-                        <div class="mb-4">
-                            <label class="block text-xs font-medium text-gray-500 mb-1.5">Assign to Salesman</label>
-                            <div class="relative">
-                                <select class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none appearance-none cursor-pointer transition-colors shadow-sm">
-                                    <option selected>Michael Thomas (Me)</option>
-                                    <option>Sarah Jenkins</option>
-                                    <option>David Miller</option>
-                                    <option>Jessica Lee</option>
-                                </select>
-                                <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-xs text-gray-400 pointer-events-none"></i>
+
+                        <!-- Step 2: Appointment Form (Hidden by default) -->
+                        <div id="appointment-form-container" class="hidden space-y-4 animate-fade-in border-t border-gray-100 pt-4 mt-4">
+                            <!-- Appointment Type -->
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1.5">Appointment Type</label>
+                                <div class="relative">
+                                    <select class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none appearance-none cursor-pointer transition-colors shadow-sm">
+                                        <option value="" disabled selected>Select type...</option>
+                                        <option>Showroom Visit</option>
+                                        <option>Test Drive</option>
+                                        <option>Video Call</option>
+                                        <option>Home Visit</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-xs text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+                            <!-- Assign Salesman -->
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1.5">Assign to Salesman</label>
+                                <div class="relative">
+                                    <select class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none appearance-none cursor-pointer transition-colors shadow-sm">
+                                        <option selected>Michael Thomas (Me)</option>
+                                        <option>Sarah Jenkins</option>
+                                        <option>David Miller</option>
+                                        <option>Jessica Lee</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-xs text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+                            <!-- Date Selection -->
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1.5">Select Date</label>
+                                <input type="date" onchange="showTimeslots()" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none shadow-sm transition-colors cursor-pointer">
+                            </div>
+                            <!-- Timeslots -->
+                            <div id="opportunity-timeslots" class="hidden mb-5 animate-fade-in">
+                                <label class="block text-xs font-medium text-gray-500 mb-2">Available Slots</label>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">09:00</button>
+                                    <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">10:30</button>
+                                    <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">11:00</button>
+                                    <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">14:30</button>
+                                    <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">15:00</button>
+                                    <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">16:30</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-4">
-                            <label class="block text-xs font-medium text-gray-500 mb-1.5">Select Date</label>
-                            <input type="date" onchange="showTimeslots()" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none shadow-sm transition-colors cursor-pointer">
-                        </div>
-                        <div id="opportunity-timeslots" class="hidden mb-5 animate-fade-in">
-                            <label class="block text-xs font-medium text-gray-500 mb-2">Available Slots</label>
-                            <div class="grid grid-cols-4 gap-2">
-                                <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">09:00</button>
-                                <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">10:30</button>
-                                <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">11:00</button>
-                                <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">14:30</button>
-                                <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">15:00</button>
-                                <button class="py-2 border border-gray-200 rounded-lg text-xs font-medium text-slate-600 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all">16:30</button>
-                            </div>
-                        </div>
-                        <button onclick="toggleOpportunityWidget()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg text-sm transition-colors shadow-md shadow-green-100 flex items-center justify-center gap-2">
-                            Confirm Appointment <i class="fa-solid fa-arrow-right"></i>
+                        
+                        <button id="opportunity-submit-btn" onclick="toggleOpportunityWidget()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg text-sm transition-colors shadow-md shadow-green-100 flex items-center justify-center gap-2 mt-4">
+                            Create Opportunity <i class="fa-solid fa-check"></i>
                         </button>
                     </div>
                 </div>
@@ -1465,6 +1494,7 @@
             }
             widget.classList.toggle('hidden');
         }
+
         function toggleOpportunityWidget() {
             const widget = document.getElementById('opportunity-widget');
             const resWidget = document.getElementById('reschedule-widget');
@@ -1473,10 +1503,26 @@
             }
             widget.classList.toggle('hidden');
         }
+
+        // NEW: Toggle Appointment Form based on radio selection
+        function toggleAppointmentForm(value) {
+            const form = document.getElementById('appointment-form-container');
+            const btn = document.getElementById('opportunity-submit-btn');
+            
+            if (value === 'schedule') {
+                form.classList.remove('hidden');
+                btn.innerHTML = 'Confirm Appointment <i class="fa-solid fa-arrow-right"></i>';
+            } else {
+                form.classList.add('hidden');
+                btn.innerHTML = 'Create Opportunity <i class="fa-solid fa-check"></i>';
+            }
+        }
+
         function showTimeslots() {
             const slots = document.getElementById('opportunity-timeslots');
             slots.classList.remove('hidden');
         }
+
         function toggleCallWidget() {
             const panel = document.getElementById('call-transcription-panel');
             const content = document.getElementById('transcription-content');
